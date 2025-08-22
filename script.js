@@ -3,7 +3,7 @@
 const blogData = [
     // Tu lista de posts (blogData) va aquí. Asegúrate de que los slugs y coverImage estén correctos.
     // Ejemplo:
-    { "Título": "⭐️ Tipos de modelos profesionales ✅ en la industria de la moda ⭐️", "slug": "Tipos_de_modelos_profesionales", "Topic": "Profesional", "coverImage": "assets/posts/Tipos_de_modelos_profesionales/portada1.jpg" },
+    { "Título": "⭐️ Tipos de modelos profesionales ✅ en la industria de la moda ⭐️", "slug": "Tipos_de_modelos_profesionales", "Topic": "Profesional", "coverImage": "assets/posts/Tipos_de_modelos_profesionales/portada.jpg" },
     { "Título": "✅ Como trabaja una AGENCIA DE MODELOS y️ TALENTOS ✅", "slug": "Como_trabaja_una_AGENCIA", "Topic": "Profesional", "coverImage": "assets/posts/Como_trabaja_una_AGENCIA/portada.jpg" },
     { "Título": "✨ CERTAMEN DE BELLEZA ✨ Una herramienta para la modelo", "slug": "CERTAMEN_DE_BELLEZA", "Topic": "Oportunidades y Formación", "coverImage": "assets/posts/CERTAMEN_DE_BELLEZA/portada.jpg" },
     { "Título": "⭐️ BACKSTAGE ⭐️ Lo que pasa detras de una pasarela", "slug": "BACKSTAGE_-_Lo_que_pasa_detras_de_una_pasarela", "Topic": "Oportunidades y Formación", "coverImage": "assets/posts/BACKSTAGE_-_Lo_que_pasa_detras_de_una_pasarela/portada.jpg" },
