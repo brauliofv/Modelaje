@@ -1,0 +1,189 @@
+<!-- photography.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photography - Braulio FV</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="index.html">BRAULIO FV</a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="photography.html">Photography</a></li>
+                <li><a href="course.html">Course for models</a></li>
+                <li><a href="terms.html">Course Terms and Cost</a></li>
+                <li><a href="ethics.html">Code of Ethics and Behavior</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="blog.html">Blog</a></li>
+            </ul>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <h1>Photography</h1>
+        <p>Aquí puedes mostrar tus galerías de fotos: Fashion, Runway, Others.</p>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
+
+<!-- course.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course for models - Braulio FV</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="index.html">BRAULIO FV</a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="photography.html">Photography</a></li>
+                <li><a href="course.html">Course for models</a></li>
+                <li><a href="terms.html">Course Terms and Cost</a></li>
+                <li><a href="ethics.html">Code of Ethics and Behavior</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="blog.html">Blog</a></li>
+            </ul>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <h1>Course for models</h1>
+        <p>Información sobre el curso para modelos.</p>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
+
+<!-- terms.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Terms and Cost - Braulio FV</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="index.html">BRAULIO FV</a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="photography.html">Photography</a></li>
+                <li><a href="course.html">Course for models</a></li>
+                <li><a href="terms.html">Course Terms and Cost</a></li>
+                <li><a href="ethics.html">Code of Ethics and Behavior</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="blog.html">Blog</a></li>
+            </ul>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <h1>Course Terms and Cost</h1>
+        <p>Términos y costos del curso.</p>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
+
+<!-- ethics.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code of Ethics and Behavior - Braulio FV</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="index.html">BRAULIO FV</a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="photography.html">Photography</a></li>
+                <li><a href="course.html">Course for models</a></li>
+                <li><a href="terms.html">Course Terms and Cost</a></li>
+                <li><a href="ethics.html">Code of Ethics and Behavior</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="blog.html">Blog</a></li>
+            </ul>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <h1>Code of Ethics and Behavior</h1>
+        <p>Código de ética y comportamiento.</p>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
+
+<!-- contact.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Braulio FV</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="index.html">BRAULIO FV</a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="photography.html">Photography</a></li>
+                <li><a href="course.html">Course for models</a></li>
+                <li><a href="terms.html">Course Terms and Cost</a></li>
+                <li><a href="ethics.html">Code of Ethics and Behavior</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="blog.html">Blog</a></li>
+            </ul>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <h1>Contact</h1>
+        <p>Información de contacto y formulario.</p>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,522 @@
+/* Estilos Generales con Variables de Tema */
+:root {
+    --primary-color: #3498db; /* Color azul principal */
+    --primary-color-hover: #2980b9;
+    --background-color: #121212;
+    --surface-color: #1f1f1f;
+    --text-color: #e0e0e0;
+    --text-color-light: #a0a0a0;
+    --header-text-color: #ffffff;
+    --btn-text-color: #121212;
+}
+
+.btn:hover {
+    background-color: var(--primary-color-hover);
+    color: var(--btn-text-color); /* <-- AÑADE ESTA LÍNEA */
+}
+
+body.light-mode {
+    --primary-color: #3498db;
+    --primary-color-hover: #2980b9;
+    --background-color: #f4f4f4;
+    --surface-color: #ffffff;
+    --text-color: #333333;
+    --text-color-light: #666666;
+    --header-text-color: #121212;
+    --btn-text-color: #ffffff;
+}
+
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    margin: 0;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--primary-color-hover);
+}
+
+h1, h2, h3 {
+    color: var(--header-text-color);
+}
+
+main {
+    padding: 2rem 5%;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: var(--primary-color);
+    color: var(--btn-text-color);
+    border-radius: 5px;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: var(--primary-color-hover);
+}
+
+/* Barra de Navegación */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 5%;
+    background-color: var(--surface-color);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.logo a {
+    color: var(--header-text-color);
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links li {
+    margin-left: 20px;
+}
+
+.nav-links a {
+    color: var(--text-color);
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.nav-links a:hover {
+    background-color: rgba(0,0,0,0.1);
+}
+
+.nav-controls {
+    display: flex;
+    align-items: center;
+}
+
+/* Botón de Tema */
+.theme-toggle-btn {
+    background: none;
+    border: none;
+    color: var(--text-color);
+    cursor: pointer;
+    font-size: 1.2rem;
+    margin-right: 20px;
+}
+.theme-toggle-btn .fa-sun { display: none; }
+.theme-toggle-btn .fa-moon { display: block; }
+
+body.light-mode .theme-toggle-btn .fa-sun { display: block; }
+body.light-mode .theme-toggle-btn .fa-moon { display: none; }
+
+
+/* Menú hamburguesa para móviles */
+.burger {
+    display: none;
+    cursor: pointer;
+}
+
+.burger div {
+    width: 25px;
+    height: 3px;
+    background-color: var(--text-color);
+    margin: 5px;
+    transition: all 0.3s ease;
+}
+
+/* Hero Section */
+.hero {
+    position: relative;
+    text-align: center;
+    color: white;
+}
+
+.hero-image {
+    width: 100%;
+    height: 60vh;
+    object-fit: cover;
+    filter: brightness(0.5);
+}
+
+.hero-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.hero-text h1 {
+    font-size: 3rem;
+    margin: 0;
+    color: #fff; /* El texto del hero siempre será blanco */
+}
+
+.hero-text p {
+    font-size: 1.2rem;
+}
+
+/* Sección de Posts */
+.posts-section {
+    padding: 4rem 0;
+    text-align: center;
+}
+
+.posts-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+}
+
+.posts-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    text-align: left;
+}
+
+.post-card {
+    background-color: var(--surface-color);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s;
+}
+
+body.light-mode .post-card {
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.post-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+
+.post-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.post-card-content {
+    padding: 1.5rem;
+}
+
+.post-card-content h3 {
+    margin-top: 0;
+}
+
+.post-card-content p {
+    color: var(--text-color-light);
+}
+
+.view-all-posts {
+    margin-top: 3rem;
+}
+
+/* Sección Sobre Mí */
+.about-me {
+    background-color: var(--surface-color);
+    padding: 4rem 5%;
+}
+
+.about-me-content {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.about-me-image img {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.about-me-text h2 {
+    font-size: 2.5rem;
+}
+
+.social-links-about a {
+    font-size: 1.5rem;
+    margin-right: 15px;
+}
+
+/* Footer */
+footer {
+    background-color: #000000;
+    color: #a0a0a0;
+    padding: 3rem 5%;
+    margin: 0 30px 30px 30px; /* Añade margen a los lados y abajo */
+    border-radius: 20px;       /* Redondea las esquinas */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Opcional: añade una sombra para darle profundidad */
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid #333;
+}
+
+.footer-column {
+    flex: 1;
+    min-width: 250px;
+}
+
+.footer-column h3 {
+    color: #ffffff;
+    margin-bottom: 1.5rem;
+}
+
+.footer-column ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-column ul li {
+    margin-bottom: 10px;
+}
+
+.certified-instructor {
+    background-color: #ffffff;
+    color: #121212;
+    padding: 15px;
+    border-radius: 5px;
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.social-links a {
+    display: block;
+    margin-bottom: 10px;
+    color: #a0a0a0;
+}
+
+.social-links a:hover {
+    color: #fff;
+}
+
+.social-links i {
+    margin-right: 10px;
+}
+
+.blog-link {
+    font-weight: bold;
+    font-size: 1.2rem;
+    display: inline-block;
+    margin-top: 1rem;
+    color: var(--primary-color);
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 2rem;
+}
+
+.stop-scams-logo {
+    width: 100px;
+    margin-top: 1rem;
+    filter: invert(0.7);
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+    .nav-links {
+        position: absolute;
+        right: 0px;
+        height: 92vh;
+        top: 8vh;
+        background-color: var(--surface-color);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 50%;
+        transform: translateX(100%);
+        transition: transform 0.5s ease-in;
+    }
+
+    .nav-links li {
+        opacity: 0;
+        margin-left: 0;
+        margin-bottom: 2rem;
+    }
+
+    .burger {
+        display: block;
+    }
+
+    .nav-active {
+        transform: translateX(0%);
+    }
+
+    @keyframes navLinkFade {
+        from {
+            opacity: 0;
+            transform: translateX(50px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0px);
+        }
+    }
+
+    .toggle .line1 {
+        transform: rotate(-45deg) translate(-5px, 6px);
+    }
+    .toggle .line2 {
+        opacity: 0;
+    }
+    .toggle .line3 {
+        transform: rotate(45deg) translate(-5px, -6px);
+    }
+
+    .about-me-content {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+/* ===== ESTILOS PARA LOS BOTONES DE FILTRO ===== */
+.filter-buttons {
+    display: flex;
+    flex-wrap: wrap; /* Para que se ajusten en pantallas pequeñas */
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 3rem;
+}
+
+.filter-btn {
+    background-color: transparent;
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    padding: 10px 20px;
+    border-radius: 25px; /* Botones redondeados */
+    cursor: pointer;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.filter-btn:hover {
+    background-color: var(--primary-color-hover);
+    color: var(--btn-text-color); /* Usamos la variable para que el texto sea legible */
+    border-color: var(--primary-color-hover);
+}
+
+.filter-btn.active {
+    background-color: var(--primary-color);
+    color: var(--btn-text-color); /* Y aquí también */
+    border-color: var(--primary-color);
+}
+
+/* Estilos para la Cita Destacada (Pullquote) */
+.block-pullquote {
+    position: relative; /* Necesario para posicionar las líneas */
+    text-align: center;
+    margin: 4rem auto; /* Espacio vertical para que respire */
+    max-width: 700px; /* Ancho máximo para que no sea demasiado largo en pantallas grandes */
+}
+
+/* Estilo para el texto dentro de la cita */
+.block-pullquote blockquote p {
+    font-size: 2.5rem;
+    font-style: italic;
+    color: var(--text-color-light); /* Usa una variable de tu tema para el color */
+    margin: 2rem 0; /* Espacio entre el texto y las líneas */
+    padding: 0;
+    line-height: 1.4;
+}
+
+/* Creación de la línea superior */
+.block-pullquote::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background-color: var(--text-color-light);
+    opacity: 0.5;
+}
+
+/* Creación de la línea inferior */
+.block-pullquote::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background-color: var(--text-color-light);
+    opacity: 0.5;
+}
+
+/* ===== Contenedor para Contenido de Texto ===== */
+/* Esta clase limita el ancho del contenido para mejorar la legibilidad */
+.text-content-container {
+    max-width: 900px; /* Ancho máximo para el texto. Puedes ajustarlo (ej. 750px, 900px) */
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 15px; /* Pequeño espacio en los lados para móviles */
+    padding-right: 15px;
+}
+/* ===== Estilos para el contenido de los posts ===== */
+
+/* Hace que todas las imágenes dentro del contenedor de texto sean responsivas */
+.text-content-container img {
+    max-width: 100%; /* La imagen nunca será más ancha que su contenedor */
+    height: auto;    /* Mantiene la proporción de la imagen */
+    border-radius: 10px; /* Opcional: añade esquinas redondeadas para un look moderno */
+    display: block;      /* Evita espacios extra debajo de la imagen */
+    margin: 2rem auto;   /* Centra la imagen y le da espacio vertical */
+}
+/* ===== Estilos para Videos y Audio Incrustados ===== */
+
+/* Contenedor para hacer los videos de YouTube responsivos */
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%; /* Proporción 16:9 */
+    height: 0;
+    overflow: hidden;
+    max-width: 100%;
+    background: #000;
+    margin: 2rem auto;
+    border-radius: 10px;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Estilo para el reproductor de audio */
+.audio-player {
+    width: 100%;
+    margin: 2rem auto;
+}
