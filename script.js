@@ -4,7 +4,7 @@ const blogData = [
     // Tu lista de posts (blogData) va aquí. Asegúrate de que los slugs y coverImage estén correctos.
     // Ejemplo:
     { "Título": "⭐️ Tipos de modelos profesionales ✅ en la industria de la moda ⭐️", "slug": "Tipos de modelos profesionales", "Topic": "Profesional", "coverImage": "assets/posts/Tipos de modelos profesionales/portada.jpg" },
-    { "Título": "✅ Como trabaja una AGENCIA DE MODELOS y️ TALENTOS ✅", "slug": "Como trabaja una AGENCIA", "Topic": "Profesional", "coverImage": "assets/posts/Como trabaja una AGENCIA/portada.jpg" },
+    { "Título": "✅ Como trabaja una AGENCIA DE MODELOS y️ TALENTOS ✅", "slug": "Como trabaja una AGENCIA", "Topic": "Profesional", "coverImage": "assets/posts/Como_trabaja_una_AGENCIA/portada.jpg" },
     { "Título": "✨ CERTAMEN DE BELLEZA ✨ Una herramienta para la modelo", "slug": "CERTAMEN DE BELLEZA", "Topic": "Oportunidades y Formación", "coverImage": "assets/posts/CERTAMEN DE BELLEZA/portada.jpg" },
     { "Título": "⭐️ BACKSTAGE ⭐️ Lo que pasa detras de una pasarela", "slug": "BACKSTAGE - Lo que pasa detras de una pasarela", "Topic": "Oportunidades y Formación", "coverImage": "assets/posts/BACKSTAGE - Lo que pasa detras de una pasarela/portada.jpg" },
     // ...etcétera para todos tus posts...
