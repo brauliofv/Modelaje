@@ -1,7 +1,7 @@
 /* Estilos Generales con Variables de Tema */
 :root {
-    --primary-color: #3498db; /* Color azul principal */
-    --primary-color-hover: #2980b9;
+    --primary-color: #ffffff;
+    --primary-color-hover: #3ca5eb;
     --background-color: #121212;
     --surface-color: #1f1f1f;
     --text-color: #e0e0e0;
@@ -10,14 +10,8 @@
     --btn-text-color: #121212;
 }
 
-.btn:hover {
-    background-color: var(--primary-color-hover);
-    color: var(--btn-text-color); /* <-- AÑADE ESTA LÍNEA */
-}
-
 body.light-mode {
-    --primary-color: #3498db;
-    --primary-color-hover: #2980b9;
+    --primary-color: #131313;
     --background-color: #f4f4f4;
     --surface-color: #ffffff;
     --text-color: #333333;
@@ -49,6 +43,7 @@ h1, h2, h3 {
     color: var(--header-text-color);
 }
 
+/* El <main> recupera su padding para que las secciones no lleguen a los bordes */
 main {
     padding: 2rem 5%;
 }
@@ -66,6 +61,7 @@ main {
 
 .btn:hover {
     background-color: var(--primary-color-hover);
+    color: var(--btn-text-color);
 }
 
 /* Barra de Navegación */
@@ -128,7 +124,6 @@ main {
 body.light-mode .theme-toggle-btn .fa-sun { display: block; }
 body.light-mode .theme-toggle-btn .fa-moon { display: none; }
 
-
 /* Menú hamburguesa para móviles */
 .burger {
     display: none;
@@ -143,36 +138,43 @@ body.light-mode .theme-toggle-btn .fa-moon { display: none; }
     transition: all 0.3s ease;
 }
 
-/* Hero Section */
-.hero {
-    position: relative;
-    text-align: center;
-    color: white;
+/* ===== SECCIÓN HERO (NUEVO DISEÑO FOTOGRAFÍA) ===== */
+/* Estos estilos ahora son independientes y se pueden usar en cualquier página */
+.hero-photography-text-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6rem 5% 4rem 5%;
+    max-width: 100%;
+    margin: 0 auto;
+    gap: 2rem;
 }
 
-.hero-image {
+.hero-title h1 {
+    font-size: 3.5rem;
+    font-weight: 300;
+    letter-spacing: 0.3rem;
+    text-transform: uppercase;
+    color: var(--header-text-color);
+    line-height: 1.2;
+}
+
+.hero-description {
+    max-width: 350px;
+    color: var(--text-color-light);
+}
+
+.hero-description strong {
+    color: var(--text-color);
+}
+
+.hero-photography-image-container img {
     width: 100%;
-    height: 60vh;
-    object-fit: cover;
-    filter: brightness(0.5);
+    height: 500px; /* Añadimos height para que object-fit funcione correctamente */
+    object-fit: cover; /* Aseguramos que cubra el contenedor */
+    display: block;
 }
 
-.hero-text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.hero-text h1 {
-    font-size: 3rem;
-    margin: 0;
-    color: #fff; /* El texto del hero siempre será blanco */
-}
-
-.hero-text p {
-    font-size: 1.2rem;
-}
 
 /* Sección de Posts */
 .posts-section {
@@ -231,44 +233,15 @@ body.light-mode .post-card {
     margin-top: 3rem;
 }
 
-/* Sección Sobre Mí */
-.about-me {
-    background-color: var(--surface-color);
-    padding: 4rem 5%;
-}
-
-.about-me-content {
-    display: flex;
-    align-items: center;
-    gap: 3rem;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.about-me-image img {
-    width: 300px;
-    height: 300px;
-    border-radius: 50%;
-    object-fit: cover;
-}
-
-.about-me-text h2 {
-    font-size: 2.5rem;
-}
-
-.social-links-about a {
-    font-size: 1.5rem;
-    margin-right: 15px;
-}
-
 /* Footer */
 footer {
     background-color: #000000;
-    color: #a0a0a0;
+    color: #dadada;
+    --primary-color: #ffffff;
     padding: 3rem 5%;
-    margin: 0 30px 30px 30px; /* Añade margen a los lados y abajo */
-    border-radius: 20px;       /* Redondea las esquinas */
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Opcional: añade una sombra para darle profundidad */
+    margin: 0 30px 30px 30px;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
 
 .footer-container {
@@ -341,7 +314,8 @@ footer {
     filter: invert(0.7);
 }
 
-/* Responsive */
+
+/* ----- Responsive ----- */
 @media screen and (max-width: 768px) {
     .nav-links {
         position: absolute;
@@ -372,151 +346,813 @@ footer {
     }
 
     @keyframes navLinkFade {
-        from {
-            opacity: 0;
-            transform: translateX(50px);
-        }
-        to {
-            opacity: 1;
-            transform: translateX(0px);
-        }
+        from { opacity: 0; transform: translateX(50px); }
+        to { opacity: 1; transform: translateX(0px); }
     }
 
-    .toggle .line1 {
-        transform: rotate(-45deg) translate(-5px, 6px);
-    }
-    .toggle .line2 {
-        opacity: 0;
-    }
-    .toggle .line3 {
-        transform: rotate(45deg) translate(-5px, -6px);
-    }
+    .toggle .line1 { transform: rotate(-45deg) translate(-5px, 6px); }
+    .toggle .line2 { opacity: 0; }
+    .toggle .line3 { transform: rotate(45deg) translate(-5px, -6px); }
 
     .about-me-content {
         flex-direction: column;
         text-align: center;
     }
+    
+    .hero-photography-text-container {
+        flex-direction: column;
+        text-align: center;
+        padding-top: 8rem;
+    }
+
+    .hero-title h1 {
+        font-size: 2.5rem;
+    }
 }
 
-/* ===== ESTILOS PARA LOS BOTONES DE FILTRO ===== */
-.filter-buttons {
-    display: flex;
-    flex-wrap: wrap; /* Para que se ajusten en pantallas pequeñas */
-    justify-content: center;
-    gap: 15px;
-    margin-bottom: 3rem;
-}
+/* ===== ESTILOS ESPECÍFICOS PARA EL HEADER DEL INDEX.HTML ===== */
 
-.filter-btn {
-    background-color: transparent;
-    border: 1px solid var(--primary-color);
-    color: var(--primary-color);
-    padding: 10px 20px;
-    border-radius: 25px; /* Botones redondeados */
-    cursor: pointer;
-    font-weight: bold;
-    text-transform: uppercase;
-    font-size: 0.9rem;
-    transition: all 0.3s ease;
-}
-
-.filter-btn:hover {
-    background-color: var(--primary-color-hover);
-    color: var(--btn-text-color); /* Usamos la variable para que el texto sea legible */
-    border-color: var(--primary-color-hover);
-}
-
-.filter-btn.active {
-    background-color: var(--primary-color);
-    color: var(--btn-text-color); /* Y aquí también */
-    border-color: var(--primary-color);
-}
-
-/* Estilos para la Cita Destacada (Pullquote) */
-.block-pullquote {
-    position: relative; /* Necesario para posicionar las líneas */
-    text-align: center;
-    margin: 4rem auto; /* Espacio vertical para que respire */
-    max-width: 700px; /* Ancho máximo para que no sea demasiado largo en pantallas grandes */
-}
-
-/* Estilo para el texto dentro de la cita */
-.block-pullquote blockquote p {
-    font-size: 2.5rem;
-    font-style: italic;
-    color: var(--text-color-light); /* Usa una variable de tu tema para el color */
-    margin: 2rem 0; /* Espacio entre el texto y las líneas */
-    padding: 0;
-    line-height: 1.4;
-}
-
-/* Creación de la línea superior */
-.block-pullquote::before {
-    content: '';
-    position: absolute;
+/* 1. Modificaciones al Navbar solo en la página de inicio */
+.home-photography-style .navbar {
+    position: absolute; /* Para que flote sobre el contenido */
+    width: 100%;
     top: 0;
     left: 0;
+    background-color: transparent; /* Fondo transparente */
+    box-shadow: none; /* Sin sombra */
+    padding: 2rem 5%;
+    box-sizing: border-box;
+}
+
+/* 2. Ocultamos los enlaces de navegación del menú principal */
+.home-photography-style .nav-links {
+    display: none;
+}
+
+/* 3. Aseguramos que el menú hamburguesa y el botón de tema estén siempre visibles en la barra */
+.home-photography-style .burger,
+.home-photography-style .theme-toggle-btn {
+    display: block; /* Forzamos su visibilidad */
+}
+
+/* 4. Ajustes para el menú desplegable (el que aparece al hacer clic) */
+/* Cuando el menú se activa, los enlaces deben volver a ser visibles */
+.home-photography-style .nav-links.nav-active {
+    display: flex;
+}
+
+/* ===== ESTILOS PARA EL NUEVO MENÚ LATERAL (OFF-CANVAS) ===== */
+
+/* 1. Estilos para el menú desplegable (.nav-links) */
+.nav-links {
+    position: fixed; /* Posición fija para que se quede en su sitio al hacer scroll */
     right: 0;
+    top: 0;
+    height: 100vh; /* Ocupa toda la altura de la pantalla */
+    width: 300px; /* Ancho del menú */
+    max-width: 80%; /* Máximo ancho en pantallas muy pequeñas */
+    background-color: var(--surface-color);
+    box-shadow: -5px 0 15px rgba(0,0,0,0.2);
+    
+    flex-direction: column; /* Apila los elementos verticalmente */
+    align-items: flex-start; /* Alinea los elementos a la izquierda */
+    justify-content: flex-start; /* Empuja los elementos hacia arriba */
+    
+    padding: 2rem;
+    box-sizing: border-box;
+    
+    transform: translateX(100%); /* Comienza oculto a la derecha */
+    transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* 2. Estilos para los elementos del menú (li) */
+.nav-links li {
+    margin: 0;
+    width: 100%;
+    padding: 0.8rem 0;
+}
+
+.nav-links li a {
+    font-size: 1.2rem;
+}
+
+/* 3. Contenedor para los botones de cerrar y tema dentro del menú */
+.nav-menu-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+body.light-mode .nav-menu-controls {
+    border-bottom-color: rgba(0, 0, 0, 0.1);
+}
+
+/* 4. Botón de cerrar (la X) */
+.close-menu {
+    cursor: pointer;
+    font-size: 1.8rem;
+    color: var(--text-color);
+}
+
+/* 5. Capa oscura de fondo (overlay) */
+.nav-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999; /* Justo debajo del menú */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0s 0.4s;
+}
+
+/* 6. Estilos cuando el menú está activo */
+.nav-active {
+    transform: translateX(0); /* Mueve el menú a la vista */
+}
+
+/* Mostramos el overlay cuando el menú está activo */
+.nav-overlay.active {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.4s ease;
+}
+
+/* 7. Ocultamos la animación de fade-in de los 'li' que ya no necesitamos */
+@keyframes navLinkFade {
+    from { opacity: 0; transform: translateX(50px); }
+    to { opacity: 0; transform: translateX(50px); } /* La dejamos inactiva */
+}
+
+/* ===== ESTILOS PARA LA SECCIÓN DE FILOSOFÍA ===== */
+
+.philosophy-section {
+    padding: 6rem 5%; /* Espacio vertical generoso */
+    text-align: center; /* Centra todo el contenido */
+}
+
+.philosophy-content {
+    max-width: 800px; /* Limita el ancho para mejor legibilidad */
+    margin: 0 auto; /* Centra el contenedor */
+}
+
+.philosophy-content p {
+    font-size: 1.8rem; /* Tamaño de letra grande y legible */
+    font-weight: 300; /* Tipografía ligera (light) */
+    line-height: 1.6;
+    color: var(--text-color-light); /* Un color de texto sutil */
+    margin-bottom: 3rem; /* Espacio antes de los enlaces sociales */
+}
+
+.philosophy-social-links a {
+    display: inline-flex; /* Para alinear el icono y el texto */
+    align-items: center;
+    color: var(--text-color);
+    margin: 0 1rem; /* Espacio entre los enlaces */
+    font-size: 1rem;
+    font-weight: 400; /* Un poco más de grosor para los enlaces */
+    transition: color 0.3s ease;
+}
+
+.philosophy-social-links a:hover {
+    color: var(--primary-color);
+}
+
+.philosophy-social-links i {
+    font-size: 1.2rem;
+    margin-right: 0.5rem; /* Espacio entre el icono y el texto */
+}
+
+/* --- Responsive para la sección de filosofía --- */
+@media screen and (max-width: 768px) {
+    .philosophy-content p {
+        font-size: 1.4rem;
+    }
+}
+
+/* ===== ESTILOS PARA LA SECCIÓN DE TRABAJOS (WORKS) ADAPTATIVO ===== */
+
+/* Sección en sí */
+.works-section {
+    padding: 6rem 5%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Título de la sección */
+.works-title {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.works-title h2 {
+    font-weight: 300;
+    font-size: 1rem;
+    letter-spacing: 0.5rem;
+    color: var(--text-color-light);
+    text-transform: uppercase;
+    position: relative;
+    display: inline-block;
+    padding: 0 2rem;
+}
+
+.works-title h2::before,
+.works-title h2::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 50px;
     height: 1px;
     background-color: var(--text-color-light);
     opacity: 0.5;
 }
 
-/* Creación de la línea inferior */
-.block-pullquote::after {
-    content: '';
+.works-title h2::before {
+    left: -40px;
+}
+
+.works-title h2::after {
+    right: -40px;
+}
+
+/* Contenedor de la galería (CSS Grid) */
+.works-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Se adapta al ancho */
+    grid-auto-rows: 250px; /* Altura mínima de las filas */
+    gap: 15px;
+}
+
+/* Item de la galería (cada imagen) */
+.post-card {
+    overflow: hidden;
+    border-radius: 15px;
+    position: relative; /* Necesario para el overlay */
+}
+
+/* La imagen */
+.post-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Importante: cubre el espacio sin deformar la imagen */
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.post-card:hover img {
+    transform: scale(1.05); /* Zoom sutil al pasar el ratón */
+}
+
+/* ===== ESTILOS PARA LA ORIENTACIÓN DE LAS IMÁGENES ===== */
+/* ===== ESTILOS PARA LA GALERÍA "WORKS" (ADAPTATIVO) ===== */
+
+.works-gallery {
+    display: grid;
+    /* Crea tantas columnas como quepan, con un mínimo de 300px */
+    grid-template-columns: repeat(4, 1fr);
+    /* Define una altura base para las filas */
+    grid-auto-rows: 250px;
+    gap: 15px;
+}
+
+.gallery-item {
+    overflow: hidden;
+    border-radius: 15px;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.05);
+}
+
+/* --- Reglas de Orientación --- */
+
+/* Las imágenes horizontales ocuparán 2 columnas de espacio */
+.gallery-item.horizontal {
+    grid-column: span 2;
+}
+
+/* Las imágenes verticales ocuparán 2 filas de espacio */
+.gallery-item.vertical {
+    grid-row: span 2;
+}
+
+/* --- Responsive para la galería --- */
+/* NUEVO ESTADO: TABLET (2 COLUMNAS) */
+@media screen and (max-width: 1200px) {
+    .works-gallery {
+        grid-template-columns: repeat(2, 1fr); /* <-- Forzamos 2 columnas */
+    }
+    
+    /* En tablet, las imágenes horizontales ocupan todo el ancho (2 de 2 columnas) */
+    .gallery-item.horizontal {
+        grid-column: span 2;
+    }
+    /* Las verticales siguen siendo altas */
+    .gallery-item.vertical {
+        grid-row: span 2;
+        grid-column: auto; /* Reseteamos la columna por si acaso */
+    }
+}
+
+/* ===== ESTILOS PARA LA SECCIÓN BIOGRAFÍA-MINI ===== */
+
+.bio-mini-section {
+    display: flex;
+    align-items: center; /* Centra verticalmente los contenedores */
+    gap: 4rem;
+    padding: 8rem 5%;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+/* Contenedor de la imagen (Columna izquierda) */
+.bio-mini-image-container {
+    flex: 1.5; /* Le da más espacio a la imagen */
+    position: relative; /* Necesario para posicionar la tarjeta de experiencia */
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.bio-mini-image-container img {
+    width: 100%;
+    height: 800px; /* Añadimos height para que object-fit funcione correctamente */
+    display: block;
+    object-fit: cover; /* Aseguramos que cubra el contenedor */
+    object-position: center 20%; /* <-- ESTA ES LA LÍNEA CLAVE */
+}
+
+
+
+/* Tarjeta "13 years of experience" */
+.experience-card {
     position: absolute;
     bottom: 0;
     left: 0;
-    right: 0;
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px); /* Efecto "glassmorphism" */
+    padding: 1.5rem 2rem;
+    border-top-right-radius: 20px;
+    color: #333; /* Texto oscuro para que contraste */
+}
+
+.experience-card h3 {
+    font-size: 2.5rem;
+    margin: 0;
+    color: #111;
+}
+
+.experience-card p {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+/* Contenedor del texto (Columna derecha) */
+.bio-mini-text-container {
+    flex: 1; /* Le da menos espacio al texto */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-self: stretch; /* Hace que ocupe toda la altura disponible */
+}
+
+.bio-link-item {
+    margin-bottom: 2.5rem;
+}
+
+.bio-link-item h4 a {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--text-color);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 6px;
+}
+
+.bio-link-item p {
+    color: var(--text-color-light);
+    margin-top: 0.5rem;
+}
+
+.bio-mini-summary p {
+    color: var(--text-color-light);
+    font-size: 1.5rem;
+    line-height: 1.7;
+}
+
+/* --- Responsive para la sección --- */
+@media screen and (max-width: 1000px) {
+    .bio-mini-section {
+        flex-direction: column; /* Apila las columnas verticalmente */
+    }
+
+    .bio-mini-text-container {
+        padding-top: 2rem;
+    }
+}
+
+/* ===== ESTILOS PARA LA SECCIÓN DEL CURSO ===== */
+
+.course-promo-section {
+    padding: 8rem 5%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Título general "COURSE" */
+.course-promo-title {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.course-promo-title h2 {
+    font-weight: 300;
+    font-size: 1rem;
+    letter-spacing: 0.5rem;
+    color: var(--text-color-light);
+    text-transform: uppercase;
+    position: relative;
+    display: inline-block;
+    padding: 0 2rem;
+}
+
+/* Líneas decorativas al lado del título */
+.course-promo-title h2::before,
+.course-promo-title h2::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 50px;
     height: 1px;
     background-color: var(--text-color-light);
     opacity: 0.5;
 }
 
-/* ===== Contenedor para Contenido de Texto ===== */
-/* Esta clase limita el ancho del contenido para mejorar la legibilidad */
-.text-content-container {
-    max-width: 900px; /* Ancho máximo para el texto. Puedes ajustarlo (ej. 750px, 900px) */
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 15px; /* Pequeño espacio en los lados para móviles */
-    padding-right: 15px;
+.course-promo-title h2::before {
+    left: -40px;
 }
-/* ===== Estilos para el contenido de los posts ===== */
 
-/* Hace que todas las imágenes dentro del contenedor de texto sean responsivas */
-.text-content-container img {
-    max-width: 100%; /* La imagen nunca será más ancha que su contenedor */
-    height: auto;    /* Mantiene la proporción de la imagen */
-    border-radius: 10px; /* Opcional: añade esquinas redondeadas para un look moderno */
-    display: block;      /* Evita espacios extra debajo de la imagen */
-    margin: 2rem auto;   /* Centra la imagen y le da espacio vertical */
+.course-promo-title h2::after {
+    right: -40px;
 }
-/* ===== Estilos para Videos y Audio Incrustados ===== */
 
-/* Contenedor para hacer los videos de YouTube responsivos */
-.video-container {
+/* Contenedor principal de las dos columnas */
+.course-promo-content {
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+}
+
+/* Columna de la imagen */
+.course-promo-image {
+    flex: 1;
+}
+
+.course-promo-image img {
+    width: 100%;
+    height: 450px; /* Añadimos height para que object-fit funcione correctamente */
+    display: block;
+    object-fit: cover; /* Aseguramos que cubra el contenedor */
+    object-position: left 20%;
+    border-radius: 15px;
+}
+
+/* Columna del texto */
+.course-promo-text {
+    flex: 1.2; /* Damos un poco más de espacio al texto */
+}
+
+.course-promo-text h3 {
+    font-size: 2.5rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    color: var(--header-text-color);
+}
+
+.course-promo-text h4 {
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--text-color-light);
+    margin-bottom: 2rem;
+}
+
+.course-promo-text p {
+    color: var(--text-color);
+    line-height: 1.8;
+    margin-bottom: 1rem;
+}
+
+/* Estilo para el botón "Learn more" */
+.cta-button {
+    display: inline-block;
+    padding: 12px 30px;
+    border: 1px solid var(--text-color-light);
+    color: var(--text-color);
+    text-transform: uppercase;
+    font-size: 1rem;
+    letter-spacing: 0.1rem;
+    transition: all 0.3s ease;
+}
+
+.cta-button:hover {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: var(--btn-text-color);
+}
+
+
+/* --- Responsive para la sección --- */
+@media screen and (max-width: 1000px) {
+    .course-promo-content {
+        flex-direction: column; /* Apila las columnas */
+        text-align: center;
+    }
+}
+
+/* ===== ESTILOS PARA LA SECCIÓN DEL BLOG (MINIMALISTA) ===== */
+
+/* Contenedor principal de la sección */
+.posts-section-minimal {
+    padding: 8rem 5%;
+    text-align: center;
+}
+
+/* Título con líneas decorativas (reutilizable) */
+.section-title-lined {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.section-title-lined h2 {
+    font-weight: 300;
+    font-size: 1rem;
+    letter-spacing: 0.5rem;
+    color: var(--text-color-light);
+    text-transform: uppercase;
     position: relative;
-    padding-bottom: 56.25%; /* Proporción 16:9 */
+    display: inline-block;
+    padding: 0 2rem;
+}
+
+.section-title-lined h2::before,
+.section-title-lined h2::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 50px;
+    height: 1px;
+    background-color: var(--text-color-light);
+    opacity: 0.5;
+}
+
+.section-title-lined h2::before {
+    left: -40px;
+}
+
+.section-title-lined h2::after {
+    right: -40px;
+}
+
+/* Contenedor de las tarjetas de posts */
+.posts-container-minimal {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    text-align: left;
+    margin-bottom: 3rem;
+}
+
+/* Estilos para la tarjeta del post individual (post-card-minimal) */
+.post-card-minimal {
+    background-color: transparent; /* Sin fondo */
+    border-radius: 0; /* Sin bordes redondeados */
+    box-shadow: none; /* Sin sombra */
+}
+
+.post-card-minimal img {
+    width: 100%;
+    height: 250px; /* Un poco más altas */
+    object-fit: cover;
+    border-radius: 15px; /* Bordes redondeados solo en la imagen */
+    margin-bottom: 1.5rem;
+}
+
+.post-card-minimal .post-card-content {
+    padding: 0; /* Sin padding extra */
+}
+
+.post-card-minimal h3 {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--text-color);
+    margin-bottom: 1.5rem;
+}
+
+/* Estilo para el botón "Learn more" minimalista */
+.post-card-minimal .btn-minimal {
+    display: inline-block;
+    padding: 10px 25px;
+    border: 1px solid var(--text-color-light);
+    color: var(--text-color);
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 0.1rem;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.post-card-minimal .btn-minimal:hover {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: var(--btn-text-color);
+}
+
+/* Enlace "Todos los posts" */
+.view-all-posts-minimal a {
+    color: var(--text-color-light);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+/* ===== ESTILOS MEJORADOS PARA LA PÁGINA DEL BLOG (CON OVERLAY) ===== */
+
+/* Estilos para los botones de filtro (sin cambios) */
+.filter-buttons {
+    display: flex; flex-wrap: wrap; justify-content: center;
+    gap: 10px; margin-bottom: 4rem;
+}
+.filter-btn {
+    background-color: var(--surface-color); border: 1px solid var(--text-color-light);
+    color: var(--text-color-light); padding: 8px 18px; border-radius: 5px;
+    cursor: pointer; font-weight: 400; text-transform: none;
+    font-size: 0.9rem; transition: all 0.3s ease;
+}
+.filter-btn:hover {
+    background-color: var(--surface-color); border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+.filter-btn.active {
+    background-color: var(--primary-color); border-color: var(--primary-color);
+    color: var(--btn-text-color);
+}
+
+/* 1. Estilos para la tarjeta de post en la página del blog */
+.posts-section .post-card {
+    position: relative; /* Muy importante para posicionar el overlay */
+    background-color: transparent;
+    box-shadow: none;
+    border-radius: 15px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.posts-section .post-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+/* 2. Estilos para la capa superpuesta (overlay) */
+.post-card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 60%);
+    opacity: 0; /* Comienza oculto */
+    transition: opacity 0.4s ease;
+    
+    display: flex;
+    align-items: flex-end; /* Alinea el contenido en la parte inferior */
+    padding: 1.5rem;
+    box-sizing: border-box;
+}
+
+/* 3. Mostrar el overlay y escalar la imagen al pasar el ratón */
+.posts-section .post-card:hover .post-card-overlay {
+    opacity: 1; /* Se hace visible */
+}
+
+.posts-section .post-card:hover img {
+    transform: scale(1.05); /* Efecto de zoom */
+}
+
+/* 4. Estilos para el contenido dentro del overlay */
+.overlay-content {
+    color: #fff;
+    transform: translateY(15px); /* Comienza ligeramente abajo */
+    transition: transform 0.4s ease;
+}
+
+.posts-section .post-card:hover .overlay-content {
+    transform: translateY(0); /* Sube a su posición final */
+}
+
+.overlay-content h3 {
+    font-size: 1.3rem;
+    margin: 0 0 0.5rem 0;
+    color: #fff; /* El título siempre será blanco */
+}
+
+.overlay-content .topic {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin: 0 0 0.5rem 0;
+}
+
+.overlay-content .tags {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0;
+    line-height: 1.4;
+}
+
+/* ===== FIN - ESTILOS MEJORADOS PARA LA PÁGINA DEL BLOG (CON OVERLAY) ===== */
+
+/* ===== ESTILOS ESPECÍFICOS PARA LA PÁGINA DE POST INDIVIDUAL ===== */
+
+/* 1. Contenedor principal de la página del post */
+.single-post-page main {
+    padding: 4rem 5%; /* Añadimos padding superior para separar del navbar */
+}
+
+/* 2. Estilos para el artículo del post */
+.single-post-page #post-content {
+    max-width: 800px; /* Limitamos el ancho para mejorar la legibilidad */
+    margin: 0 auto; /* Centramos el contenido */
+}
+
+/* 3. Estilos para el título del post y metadatos */
+.single-post-page #post-content h1 {
+    font-size: 2.8rem;
+    margin-bottom: 1rem;
+}
+
+.single-post-page #post-content .post-meta {
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.2);
+    color: var(--text-color-light);
+}
+
+/* 4. Estilos para el contenido del post (texto, imágenes, videos) */
+.single-post-page #post-content .post-body h2 {
+    font-size: 2rem;
+    margin-top: 3rem;
+    margin-bottom: 1.5rem;
+}
+
+.single-post-page #post-content .post-body p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+}
+
+/* 5. Solución para las imágenes desbordadas */
+.single-post-page #post-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 15px;
+    margin: 2rem 0;
+}
+
+/* 6. Solución para videos pequeños (ya teníamos el contenedor) */
+/* Simplemente nos aseguramos de que se aplique correctamente aquí */
+.single-post-page .video-container {
+    position: relative;
+    padding-bottom: 56.25%; /* Relación de aspecto 16:9 */
     height: 0;
     overflow: hidden;
-    max-width: 100%;
-    background: #000;
+    max-width: 100%; /* El contenedor de video ocupará el espacio disponible */
+    background: #000000;
     margin: 2rem auto;
     border-radius: 10px;
 }
-
 .video-container iframe {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-}
-
-/* Estilo para el reproductor de audio */
-.audio-player {
+ }
+ .audio-player {
     width: 100%;
-    margin: 2rem auto;
+    margin: 2rem 0;
 }
+/* ===== FIN ESTILOS ESPECÍFICOS PARA LA PÁGINA DE POST INDIVIDUAL ===== */
