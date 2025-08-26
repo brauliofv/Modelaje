@@ -1410,3 +1410,7 @@ body.dark-mode .posts-section .post-card:hover {
     line-height: 1;
 }
 /* ===== FIN ESTILOS PARA LAS PÁGINAS DE GALERÍA DE FOTOS ===== */
+
+.contact-page div {
+    padding-top: 2rem;
+}
