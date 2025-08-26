@@ -20,6 +20,7 @@ body.light-mode {
     --btn-text-color: #ffffff;
 }
 
+
 body {
     font-family: 'Helvetica Neue', Arial, sans-serif;
     margin: 0;
@@ -126,7 +127,7 @@ body.light-mode .theme-toggle-btn .fa-moon { display: none; }
 
 /* Menú hamburguesa para móviles */
 .burger {
-    display: none;
+    display: block;
     cursor: pointer;
 }
 
@@ -317,32 +318,10 @@ footer {
 
 /* ----- Responsive ----- */
 @media screen and (max-width: 768px) {
-    .nav-links {
-        position: absolute;
-        right: 0px;
-        height: 92vh;
-        top: 8vh;
-        background-color: var(--surface-color);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 50%;
-        transform: translateX(100%);
-        transition: transform 0.5s ease-in;
-    }
-
-    .nav-links li {
-        opacity: 0;
-        margin-left: 0;
-        margin-bottom: 2rem;
-    }
+    
 
     .burger {
         display: block;
-    }
-
-    .nav-active {
-        transform: translateX(0%);
     }
 
     @keyframes navLinkFade {
@@ -350,9 +329,7 @@ footer {
         to { opacity: 1; transform: translateX(0px); }
     }
 
-    .toggle .line1 { transform: rotate(-45deg) translate(-5px, 6px); }
-    .toggle .line2 { opacity: 0; }
-    .toggle .line3 { transform: rotate(45deg) translate(-5px, -6px); }
+    
 
     .about-me-content {
         flex-direction: column;
@@ -384,59 +361,55 @@ footer {
     box-sizing: border-box;
 }
 
-/* 2. Ocultamos los enlaces de navegación del menú principal */
-.home-photography-style .nav-links {
-    display: none;
-}
+/* ===== ESTILOS PARA EL MENÚ LATERAL (OFF-CANVAS) - CORREGIDO ===== */
 
-/* 3. Aseguramos que el menú hamburguesa y el botón de tema estén siempre visibles en la barra */
-.home-photography-style .burger,
-.home-photography-style .theme-toggle-btn {
-    display: block; /* Forzamos su visibilidad */
-}
-
-/* 4. Ajustes para el menú desplegable (el que aparece al hacer clic) */
-/* Cuando el menú se activa, los enlaces deben volver a ser visibles */
-.home-photography-style .nav-links.nav-active {
-    display: flex;
-}
-
-/* ===== ESTILOS PARA EL NUEVO MENÚ LATERAL (OFF-CANVAS) ===== */
-
-/* 1. Estilos para el menú desplegable (.nav-links) */
 .nav-links {
-    position: fixed; /* Posición fija para que se quede en su sitio al hacer scroll */
+    position: fixed;
     right: 0;
     top: 0;
-    height: 100vh; /* Ocupa toda la altura de la pantalla */
-    width: 300px; /* Ancho del menú */
-    max-width: 80%; /* Máximo ancho en pantallas muy pequeñas */
+    height: 100vh;
+    width: 300px;
+    max-width: 80%;
     background-color: var(--surface-color);
     box-shadow: -5px 0 15px rgba(0,0,0,0.2);
     
-    flex-direction: column; /* Apila los elementos verticalmente */
-    align-items: flex-start; /* Alinea los elementos a la izquierda */
-    justify-content: flex-start; /* Empuja los elementos hacia arriba */
+    display: flex; /* Mantenemos flex */
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
     
     padding: 2rem;
     box-sizing: border-box;
     
-    transform: translateX(100%); /* Comienza oculto a la derecha */
+    transform: translateX(100%);
     transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    z-index: 1000; /* Asegura que el menú esté por encima de todo */
+
+    /* CORRECCIÓN CLAVE: Reseteamos padding y margin del UL */
+    margin: 0; 
+    list-style: none;
 }
 
-/* 2. Estilos para los elementos del menú (li) */
-.nav-links li {
+/* Estilos para los elementos del menú (li) */
+.nav-links li.nav-item {
     margin: 0;
     width: 100%;
     padding: 0.8rem 0;
 }
 
-.nav-links li a {
+.nav-links li a, .nav-links .nav-parent-link {
     font-size: 1.2rem;
+    color: var(--text-color);
+    text-decoration: none;
+    display: block; /* Ocupa todo el ancho */
+    width: 100%;
 }
 
-/* 3. Contenedor para los botones de cerrar y tema dentro del menú */
+.nav-parent-link {
+    cursor: pointer;
+}
+
+/* Contenedor para los controles superiores del menú */
 .nav-menu-controls {
     display: flex;
     justify-content: space-between;
@@ -444,21 +417,38 @@ footer {
     width: 100%;
     margin-bottom: 2rem;
     padding-bottom: 1rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(128, 128, 128, 0.2);
 }
 
-body.light-mode .nav-menu-controls {
-    border-bottom-color: rgba(0, 0, 0, 0.1);
-}
-
-/* 4. Botón de cerrar (la X) */
 .close-menu {
     cursor: pointer;
     font-size: 1.8rem;
-    color: var(--text-color);
+    color: red;
+    background: none;
+    border: none;
+    padding: 0;
 }
 
-/* 5. Capa oscura de fondo (overlay) */
+/* ===== ESTILOS PARA EL SUBMENÚ ===== */
+.submenu {
+    list-style: none;
+    padding-left: 20px; /* Indentación para los sub-items */
+    max-height: 0; /* Comienza cerrado */
+    overflow: hidden; /* Oculta el contenido */
+    transition: max-height 0.4s ease-out; /* Animación suave */
+}
+
+.submenu li a {
+    font-size: 1rem; /* Letra más pequeña para sub-items */
+    color: var(--text-color-light);
+}
+
+/* Cuando el submenú está abierto */
+.has-submenu.open .submenu {
+    max-height: 200px; /* Altura suficiente para mostrar los items */
+}
+
+/* Capa oscura de fondo (overlay) */
 .nav-overlay {
     position: fixed;
     top: 0;
@@ -466,29 +456,26 @@ body.light-mode .nav-menu-controls {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
-    z-index: 999; /* Justo debajo del menú */
+    z-index: 999;
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.4s ease, visibility 0s 0.4s;
 }
 
-/* 6. Estilos cuando el menú está activo */
+/* Estilos cuando el menú está activo */
 .nav-active {
-    transform: translateX(0); /* Mueve el menú a la vista */
+    transform: translateX(0);
+    display: flex; /* Asegura que sea visible */
 }
 
-/* Mostramos el overlay cuando el menú está activo */
 .nav-overlay.active {
     opacity: 1;
     visibility: visible;
     transition: opacity 0.4s ease;
 }
 
-/* 7. Ocultamos la animación de fade-in de los 'li' que ya no necesitamos */
-@keyframes navLinkFade {
-    from { opacity: 0; transform: translateX(50px); }
-    to { opacity: 0; transform: translateX(50px); } /* La dejamos inactiva */
-}
+
+/* ===== FIN - ESTILOS PARA EL MENÚ LATERAL (OFF-CANVAS) ===== */
 
 /* ===== ESTILOS PARA LA SECCIÓN DE FILOSOFÍA ===== */
 
@@ -987,7 +974,8 @@ body.light-mode .nav-menu-controls {
     text-underline-offset: 4px;
 }
 
-/* ===== ESTILOS MEJORADOS PARA LA PÁGINA DEL BLOG (CON OVERLAY) ===== */
+
+/* ===== ESTILOS PARA LA PÁGINA DEL BLOG (TEXTO VISIBLE) ===== */
 
 /* Estilos para los botones de filtro (sin cambios) */
 .filter-buttons {
@@ -1011,79 +999,60 @@ body.light-mode .nav-menu-controls {
 
 /* 1. Estilos para la tarjeta de post en la página del blog */
 .posts-section .post-card {
-    position: relative; /* Muy importante para posicionar el overlay */
-    background-color: transparent;
-    box-shadow: none;
+    background-color: var(--surface-color);
     border-radius: 15px;
     overflow: hidden;
-    cursor: pointer;
-}
-
-.posts-section .post-card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.4s ease;
-}
-
-/* 2. Estilos para la capa superpuesta (overlay) */
-.post-card-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 60%);
-    opacity: 0; /* Comienza oculto */
-    transition: opacity 0.4s ease;
-    
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     display: flex;
-    align-items: flex-end; /* Alinea el contenido en la parte inferior */
+    flex-direction: column; /* Apila imagen y contenido */
+}
+
+body.dark-mode .posts-section .post-card {
+     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.posts-section .post-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+body.dark-mode .posts-section .post-card:hover {
+    box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+}
+
+/* 2. El contenido de texto ahora es visible */
+.posts-section .post-card .post-card-content {
+    display: block;
     padding: 1.5rem;
-    box-sizing: border-box;
+    flex-grow: 1; /* Permite que el contenido crezca si es necesario */
 }
 
-/* 3. Mostrar el overlay y escalar la imagen al pasar el ratón */
-.posts-section .post-card:hover .post-card-overlay {
-    opacity: 1; /* Se hace visible */
+.posts-section .post-card h3 a {
+    color: var(--header-text-color);
+    text-decoration: none;
 }
 
-.posts-section .post-card:hover img {
-    transform: scale(1.05); /* Efecto de zoom */
+.posts-section .post-card p {
+    color: var(--text-color-light);
 }
 
-/* 4. Estilos para el contenido dentro del overlay */
-.overlay-content {
-    color: #fff;
-    transform: translateY(15px); /* Comienza ligeramente abajo */
-    transition: transform 0.4s ease;
-}
-
-.posts-section .post-card:hover .overlay-content {
-    transform: translateY(0); /* Sube a su posición final */
-}
-
-.overlay-content h3 {
-    font-size: 1.3rem;
-    margin: 0 0 0.5rem 0;
-    color: #fff; /* El título siempre será blanco */
-}
-
-.overlay-content .topic {
-    font-size: 0.9rem;
-    font-weight: bold;
-    color: var(--primary-color);
-    margin: 0 0 0.5rem 0;
-}
-
-.overlay-content .tags {
+/* 3. Estilo para los tags */
+.posts-section .post-card .tags {
     font-size: 0.8rem;
-    color: rgba(255, 255, 255, 0.7);
-    margin: 0;
+    color: var(--text-color-light);
+    margin-top: 1rem;
     line-height: 1.4;
+    opacity: 0.8;
 }
 
-/* ===== FIN - ESTILOS MEJORADOS PARA LA PÁGINA DEL BLOG (CON OVERLAY) ===== */
+/* 4. Estilo para la imagen de la tarjeta */
+.posts-section .post-card img {
+    height: 200px;
+    width: 100%;
+    object-fit: cover;
+}
+
 
 /* ===== ESTILOS ESPECÍFICOS PARA LA PÁGINA DE POST INDIVIDUAL ===== */
 
@@ -1156,3 +1125,288 @@ body.light-mode .nav-menu-controls {
     margin: 2rem 0;
 }
 /* ===== FIN ESTILOS ESPECÍFICOS PARA LA PÁGINA DE POST INDIVIDUAL ===== */
+
+/* ===== ESTILOS PARA LA PÁGINA DEL CURSO (COURSE.HTML) ===== */
+
+/* Contenedor principal para limitar el ancho y centrar */
+.course-page-container {
+    max-width: 1200px;
+    margin: 4rem auto;
+    padding: 0 2rem;
+}
+
+/* Estructura de dos columnas para contenido bilingüe */
+.bilingual-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Dos columnas de igual tamaño */
+    gap: 3rem; /* Espacio entre columnas */
+    margin-bottom: 2rem;
+}
+
+/* Estilos generales para las columnas */
+.column-es, .column-en {
+    font-size: 1rem;
+    line-height: 1.7;
+}
+
+.column-en, .column-es p, li {
+    text-align: left;
+}
+
+/* Títulos principales de sección (H2) */
+.course-page-container h2 {
+    font-size: 2rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    color: var(--header-text-color);
+}
+
+/* Subtítulos de sección (H3) */
+.course-page-container h3 {
+    font-size: 1.8rem;
+    font-weight: 500;
+    margin-bottom: 2rem;
+    color: var(--header-text-color);
+}
+
+.course-content h3 {
+    text-align: center;
+}
+
+/* Estilos para párrafos y listas */
+.course-page-container p {
+    color: var(--text-color);
+    margin-bottom: 1.5rem;
+}
+
+.course-page-container ul {
+    list-style-type: disc;
+    padding-left: 20px;
+    margin-bottom: 1.5rem;
+    color: var(--text-color);
+}
+
+.course-page-container ul li {
+    margin-bottom: 1rem;
+}
+
+/* Estilo para las imágenes a ancho completo */
+.full-width-image {
+    width: 100%;
+    border-radius: 15px;
+    margin: 2rem 0 4rem 0;
+}
+
+/* Contenedor para el botón final */
+.course-cta-button-container {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+
+/* --- Responsive para la página del curso --- */
+@media screen and (max-width: 768px) {
+    .bilingual-columns {
+        grid-template-columns: 1fr; /* Apila las columnas en móvil */
+        gap: 1rem; /* Reduce el espacio */
+    }
+
+    /* Oculta la columna en inglés en pantallas pequeñas para no duplicar info */
+    .column-en {
+        display: none;
+    }
+}
+
+/* ===== ESTILOS PARA LA PÁGINA DE TESTIMONIOS ===== */
+
+.testimonials-page-container {
+    max-width: 1200px;
+    margin: 1rem auto;
+    padding: 0 2rem;
+}
+
+.testimonials-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.testimonials-header h2 {
+    font-size: 2.5rem;
+    color: var(--header-text-color);
+    margin-bottom: 1rem;
+}
+
+.testimonials-header p {
+    font-size: 1.1rem;
+    color: var(--text-color-light);
+    margin-bottom: 1rem;
+}
+
+.testimonials-header a {
+    color: var(--primary-color);
+    font-weight: 500;
+}
+
+/* Cuadrícula de testimonios */
+.testimonials-grid {
+    display: grid;
+    /* Crea 3 columnas en escritorio, 2 en tablet y 1 en móvil */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+/* Tarjeta de testimonio individual */
+.testimonial-card {
+    background-color: var(--surface-color);
+    border: 1px solid rgba(128, 128, 128, 0.1);
+    border-radius: 15px;
+    padding: 2rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column; /* Apila los elementos verticalmente */
+}
+
+/* Estrellas de calificación */
+.rating-stars {
+    color: var(--primary-color);
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Texto del testimonio */
+.testimonial-text {
+    flex-grow: 1; /* Empuja la información del autor hacia abajo */
+    color: var(--text-color);
+    line-height: 1.7;
+    margin-bottom: 2rem;
+}
+
+/* Información del autor */
+.author-info img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0 auto 1rem auto;
+}
+
+.author-name {
+    font-weight: bold;
+    color: var(--text-color);
+    margin: 0;
+}
+
+.author-title {
+    font-size: 0.9rem;
+    color: var(--text-color-light);
+    margin: 0;
+}
+
+/* ===== ESTILOS PARA LAS PÁGINAS DE GALERÍA DE FOTOS ===== */
+
+.gallery-page-section {
+    padding: 4rem 2%; /* Menos padding lateral para que las fotos estén más cerca de los bordes */
+}
+
+/* Cuadrícula de la galería */
+.photo-gallery-grid {
+    display: grid;
+    /* Crea 3 columnas en escritorio, 2 en tablet y 1 en móvil */
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 15px;
+}
+
+.gallery-photo-item {
+    overflow: hidden;
+    border-radius: 15px;
+    cursor: pointer;
+    aspect-ratio: 3 / 4; /* Proporción vertical (puedes ajustarla a 1/1, 16/9, etc.) */
+}
+
+.gallery-photo-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+.gallery-photo-item:hover img {
+    transform: scale(1.05);
+    filter: brightness(0.8);
+}
+
+/* ===== LIGHTBOX (CON DESCRIPCIÓN) ===== */
+
+/* Contenedor del lightbox, inicialmente oculto */
+.lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9); /* Un poco más oscuro */
+    z-index: 1001;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0s 0.4s;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.lightbox.active {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.4s ease;
+}
+
+/* Nuevo contenedor para imagen + texto */
+.lightbox-content {
+    background-color: #fff; /* Fondo blanco para el contenido */
+    border-radius: 10px;
+    overflow: hidden;
+    max-width: 90vw; /* Máximo ancho relativo a la pantalla */
+    max-height: 90vh; /* Máxima altura relativa a la pantalla */
+    display: flex;
+    flex-direction: column; /* Apila imagen y texto */
+    transform: scale(0.8);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.lightbox.active .lightbox-content {
+    transform: scale(1);
+}
+
+/* Imagen dentro del lightbox */
+.lightbox img {
+    width: 100%; /* La imagen se ajusta al contenedor */
+    max-height: 80vh; /* Limita la altura de la imagen para dejar espacio al texto */
+    object-fit: contain; /* Muestra la imagen completa sin recortar */
+}
+
+/* Descripción de la imagen */
+.lightbox-description {
+    padding: 1rem 1.5rem;
+    background-color: #fff;
+    color: #333;
+    font-size: 1rem;
+    text-align: left;
+    margin: 0;
+}
+
+/* Botón de cerrar el lightbox */
+.lightbox .close-lightbox {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 2.5rem;
+    color: #fff;
+    cursor: pointer;
+    background: none;
+    border: none;
+    line-height: 1;
+}
+/* ===== FIN ESTILOS PARA LAS PÁGINAS DE GALERÍA DE FOTOS ===== */

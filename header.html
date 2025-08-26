@@ -1,45 +1,46 @@
 <header>
-    
-        <!-- Busca la etiqueta -->
-        <nav class="navbar">
-            <div class="logo">
-                <a href="index.html">BRAULIO</a>
-            </div>
-            <ul class="nav-links">
-                <!-- 1. Añadimos un contenedor para los controles superiores del menú -->
-                <li class="nav-menu-controls">
-                    <button id="theme-toggle-menu" class="theme-toggle-btn">
-                        <i class="fas fa-sun"></i>
-                        <i class="fas fa-moon"></i>
-                    </button>
-                    <div class="close-menu">
-                        <i class="fas fa-times"></i>
-                    </div>
-                </li>
-                <!-- Los enlaces del menú -->
-                <li><a href="photography.html">Photography</a></li>
-                <li><a href="course.html">Course for models</a></li>
-                <li><a href="terms.html">Course Terms and Cost</a></li>
-                <li><a href="ethics.html">Code of Ethics and Behavior</a></li>
-                <li><a href="contact.html">Contact</a></li>
-                <li><a href="blog.html">Blog</a></li>
-            </ul>
-            <div class="nav-controls">
-                <!-- 2. Movemos el botón de tema original aquí, fuera del menú desplegable -->
-                <button id="theme-toggle-header" class="theme-toggle-btn">
-                    <i class="fas fa-sun"></i>
-                    <i class="fas fa-moon"></i>
+    <nav class="navbar">
+        <div class="logo">
+            <a href="index.html">BRAULIO</a>
+        </div>
+        <ul class="nav-links">
+            <!-- 1. Añadimos un contenedor para los controles superiores del menú -->
+            <li class="nav-menu-controls">
+                <button id="theme-toggle-menu" class="theme-toggle-btn">
+                    <i class="fas fa-sun"></i><i class="fas fa-moon"></i>
                 </button>
-                <div class="burger">
-                    <div class="line1"></div>
-                    <div class="line2"></div>
-                    <div class="line3"></div>
-                </div>
+                <button class="close-menu" aria-label="Cerrar menú">
+                    <i class="fas fa-times"></i>
+                </button>
+            </li>
+
+            <!-- === ESTRUCTURA PARA EL MENÚ === -->
+            <li class="nav-item has-submenu">
+                <span class="nav-parent-link">Photography</span>
+                <ul class="submenu">
+                    <li><a href="fashion.html">Fashion</a></li>
+                    <li><a href="runway.html">Runway</a></li>
+                    <li><a href="others.html">Others</a></li>
+                </ul>
+            </li>
+            <li class="nav-item"><a href="course.html">Course for models</a></li>
+            <li class="nav-item"><a href="terms.html">Course Terms and Cost</a></li>
+            <li class="nav-item"><a href="ethics.html">Code of Ethics and Behavior</a></li>
+            <li class="nav-item"><a href="contact.html">Contact</a></li>
+            <li class="nav-item"><a href="blog.html">Blog</a></li>
+        </ul>
+        <div class="nav-controls">
+            <!-- BOTON DE TEMA -->
+            <button id="theme-toggle-header" class="theme-toggle-btn">
+                <i class="fas fa-sun"></i>
+                <i class="fas fa-moon"></i>
+            </button>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
             </div>
-        </nav>
-    
-        <!-- Añadimos el overlay fuera del nav -->
-        <div class="nav-overlay"></div>
-    
-    
-    </header>
+        </div>
+    </nav>
+    <div class="nav-overlay"></div>
+</header>
