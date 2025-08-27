@@ -1,11 +1,60 @@
 // ===== INICIO DEL ARCHIVO script.js =====
 
-const blogData = [
-    { "Título": "⭐️ Tipos de modelos profesionales ✅ en la industria de la moda ⭐️", "slug": "Tipos_de_modelos_profesionales", "Topic": "Profesional", "coverImage": "assets/posts/Tipos_de_modelos_profesionales/portada.jpg" },
-    { "Título": "✅ Como trabaja una AGENCIA DE MODELOS y️ TALENTOS ✅", "slug": "Como_trabaja_una_AGENCIA", "Topic": "Profesional", "coverImage": "assets/posts/Como_trabaja_una_AGENCIA/portada.jpg" },
-    { "Título": "✨ CERTAMEN DE BELLEZA ✨ Una herramienta para la modelo", "slug": "CERTAMEN_DE_BELLEZA", "Topic": "Oportunidades y Formación", "coverImage": "assets/posts/CERTAMEN_DE_BELLEZA/portada.jpg" },
-    { "Título": "⭐️ BACKSTAGE ⭐️ Lo que pasa detras de una pasarela", "slug": "BACKSTAGE_-_Lo_que_pasa_detras_de_una_pasarela", "Topic": "Oportunidades y Formación", "coverImage": "assets/posts/BACKSTAGE_-_Lo_que_pasa_detras_de_una_pasarela/portada.jpg" }
-];
+// ===== INICIO DEL ARCHIVO script.js (TOTALMENTE DINÁMICO) =====
+
+// 1. Ya no tenemos un blogData estático. Se construirá dinámicamente.
+let blogData = [];
+
+// --- INICIALIZACIÓN PRINCIPAL ---
+document.addEventListener('DOMContentLoaded', function() {
+    // 2. La inicialización ahora comienza con la construcción de los datos del blog.
+    buildBlogData().then(() => {
+        // 3. Una vez construido, ejecutamos el resto de la lógica.
+        loadComponents();
+    });
+});
+
+// --- FUNCIÓN PARA CONSTRUIR blogData DINÁMICAMENTE ---
+async function buildBlogData() {
+    try {
+        const indexResponse = await fetch('posts-index.json');
+        const postSlugs = await indexResponse.json();
+
+        const postPromises = postSlugs.map(async (slug) => {
+            const postPath = `assets/posts/${slug}/content.html`;
+            const contentResponse = await fetch(postPath);
+            if (!contentResponse.ok) return null;
+            const htmlContent = await contentResponse.text();
+
+            // Usamos un truco para leer el HTML y extraer los metadatos
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = htmlContent;
+
+            const title = tempDiv.querySelector('meta[name="title"]')?.getAttribute('content') || slug.replace(/_/g, ' ');
+            const topic = tempDiv.querySelector('meta[name="topic"]')?.getAttribute('content') || 'General';
+            const tags = tempDiv.querySelector('meta[name="tags"]')?.getAttribute('content') || '';
+            const coverImageFile = tempDiv.querySelector('meta[name="cover"]')?.getAttribute('content') || '';
+            
+            return {
+                "Título": title,
+                "slug": slug,
+                "Topic": topic,
+                "Tags": tags,
+                "coverImage": coverImageFile ? `assets/posts/${slug}/${coverImageFile}` : ''
+            };
+        });
+
+        const posts = await Promise.all(postPromises);
+        // Filtramos cualquier post que no se haya podido cargar y lo asignamos a la variable global.
+        blogData = posts.filter(post => post !== null);
+        
+        // Opcional: Ordenar posts por algún criterio, por ahora se ordenan como en el JSON.
+        // Si tuvieras una fecha en los metadatos, podríamos ordenar por fecha aquí.
+
+    } catch (error) {
+        console.error("Error al construir los datos del blog:", error);
+    }
+}
 
 // --- INICIALIZACIÓN PRINCIPAL ---
 document.addEventListener('DOMContentLoaded', function() {
@@ -13,7 +62,10 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // --- FUNCIÓN PARA CARGAR COMPONENTES ---
+// Busca la función loadComponents en tu script.js
 async function loadComponents() {
+    const splashScreen = document.getElementById('splash-screen'); // <-- Obtenemos la pantalla de carga
+
     const headerPlaceholder = document.getElementById('header-placeholder');
     const footerPlaceholder = document.getElementById('footer-placeholder');
 
@@ -25,19 +77,28 @@ async function loadComponents() {
 
         if (headerRes.ok && headerPlaceholder) {
             headerPlaceholder.innerHTML = await headerRes.text();
-            // 1. Inicializamos los scripts del header DESPUÉS de cargarlo
-            initializeHeaderScripts(); 
+            initializeHeaderScripts();
         }
 
         if (footerRes.ok && footerPlaceholder) {
             footerPlaceholder.innerHTML = await footerRes.text();
         }
 
-        // 2. El resto de la lógica que depende de la página se ejecuta ahora
         initializePageSpecificScripts();
 
     } catch (error) {
         console.error('Error al cargar los componentes:', error);
+    } finally {
+        // ===== LÓGICA PARA OCULTAR LA ANIMACIÓN =====
+        // Se ejecuta siempre, incluso si hay un error,
+        // para que el usuario no se quede atascado.
+        if (splashScreen) {
+            // Esperamos un poco más para que la animación se aprecie
+            setTimeout(() => {
+                splashScreen.classList.add('hidden');
+            }, 1000); // 500ms = 0.5 segundos de espera extra
+        }
+        // ===========================================
     }
 }
 
@@ -54,7 +115,7 @@ function initializePageSpecificScripts() {
     const worksGallery = document.querySelector('.works-gallery');
     const photoGallery = document.querySelector('.photo-gallery-grid');
 
-    if (postsContainer) { displayPosts(blogData.slice(0, 6), postsContainer); }
+    if (postsContainer) { displayPosts(blogData.slice(0, 3), postsContainer); }
     if (blogContainer) { displayPosts(blogData, blogContainer); setupFilters(); }
     if (postContentContainer) { loadSinglePost(); }
     if (worksGallery) { processWorksGallery(); }
@@ -111,66 +172,25 @@ function loadSinglePost() {
 function displayPosts(posts, container) {
     if (!container) return;
     container.innerHTML = '';
-    
-    const isMinimalStyle = container.classList.contains('posts-container-minimal');
-    const isBlogPage = container.id === 'blog-container';
 
     posts.forEach(post => {
         if (!post || !post.Título) return;
         
-        const cardClass = isMinimalStyle ? 'post-card-minimal' : 'post-card';
         const postCard = document.createElement('div');
-        postCard.classList.add(cardClass);
+        postCard.classList.add('post-card'); // Siempre usamos 'post-card'
         
         const imageUrl = post.coverImage || `https://placehold.co/600x400/1f1f1f/3498db?text=Sin+Imagen`;
 
-        // Generamos el HTML base de la tarjeta
-        if (isBlogPage) {
-            postCard.innerHTML = `
-                <a href="post.html?title=${encodeURIComponent(post.Título)}">
-                    <img src="${imageUrl}" alt="${post.Título}">
-                    <div class="post-card-overlay">
-                        <div class="overlay-content">
-                            <h3>${post.Título}</h3>
-                            <p class="topic">${post.Topic || ''}</p>
-                            <p class="tags-placeholder"></p> <!-- Placeholder para los tags -->
-                        </div>
-                    </div>
-                </a>`;
-
-            // ===== LÓGICA PARA CARGAR LOS TAGS DINÁMICAMENTE =====
-            const postPath = `assets/posts/${post.slug}/content.html`;
-            fetch(postPath)
-                .then(response => response.ok ? response.text() : Promise.reject('No content file'))
-                .then(htmlContent => {
-                    // Usamos un truco para leer el HTML sin mostrarlo
-                    const tempDiv = document.createElement('div');
-                    tempDiv.innerHTML = htmlContent;
-                    
-                    const tagsElement = tempDiv.querySelector('.tags');
-                    if (tagsElement) {
-                        const tagsText = tagsElement.textContent;
-                        const tagsPlaceholder = postCard.querySelector('.tags-placeholder');
-                        if (tagsPlaceholder) {
-                            tagsPlaceholder.textContent = tagsText;
-                        }
-                    }
-                })
-                .catch(error => {
-                    // Si no encuentra los tags, el espacio simplemente quedará vacío.
-                    // console.warn(`No se pudieron cargar los tags para ${post.Título}:`, error);
-                });
-            // ===== FIN DE LA LÓGICA DE TAGS =====
-
-        } else if (isMinimalStyle) {
-            // Estructura para la página de inicio (sin cambios)
-            postCard.innerHTML = `
-                <a href="post.html?title=${encodeURIComponent(post.Título)}"><img src="${imageUrl}" alt="${post.Título}"></a>
-                <div class="post-card-content">
-                    <h3><a href="post.html?title=${encodeURIComponent(post.Título)}">${post.Título}</a></h3>
-                    <a href="post.html?title=${encodeURIComponent(post.Título)}" class="btn-minimal">Learn more</a>
-                </div>`;
-        }
+        // Usamos la misma estructura para todas las tarjetas de post
+        postCard.innerHTML = `
+            <a href="post.html?title=${encodeURIComponent(post.Título)}">
+                <img src="${imageUrl}" alt="${post.Título}">
+            </a>
+            <div class="post-card-content">
+                <h3><a href="post.html?title=${encodeURIComponent(post.Título)}">${post.Título}</a></h3>
+                <p><strong>Tópico:</strong> ${post.Topic || 'N/A'}</p>
+                <p class="tags">${post.Tags || ''}</p>
+            </div>`;
         
         container.appendChild(postCard);
     });
