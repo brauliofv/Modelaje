@@ -56,10 +56,7 @@ async function buildBlogData() {
     }
 }
 
-// --- INICIALIZACIÓN PRINCIPAL ---
-document.addEventListener('DOMContentLoaded', function() {
-    loadComponents();
-});
+
 
 // --- FUNCIÓN PARA CARGAR COMPONENTES ---
 // Busca la función loadComponents en tu script.js
@@ -154,9 +151,15 @@ function loadSinglePost() {
                 let processedContent = htmlContent;
                 const youtubeRegex = /(<p>)?\s*<a href="https?:\/\/(?:www\.)?youtube\.com\/watch\?v=([a-zA-Z0-9_-]+)[^"]*">.*?<\/a>\s*(<\/p>)?/g;
                 processedContent = processedContent.replace(youtubeRegex, (match, pStart, videoId, pEnd) => `<div class="video-container"><iframe src="https://www.youtube.com/embed/${videoId}" frameborder="0" allowfullscreen></iframe></div>`);
-                const audioRegex = /<a href="([^"]+\.mp3)">[^<]+<\/a>/g;
-                processedContent = processedContent.replace(audioRegex, (match, audioUrl) => `<audio controls class="audio-player" src="assets/posts/${post.slug}/${audioUrl.split('/').pop()}"></audio>`);
-                postContentContainer.innerHTML = `<h1>${post.Título}</h1><div class="post-meta"><p><strong>Tópico:</strong> ${post.Topic || 'N/A'}</p></div><div class="post-body">${processedContent}</div>`;
+                
+                postContentContainer.innerHTML = `
+                <h1>${post.Título}</h1>
+                <div class="post-meta">
+                    <p><strong>Tópico:</strong> ${post.Topic || 'N/A'}</p>
+                    ${post.Tags ? `<p class="tags"><strong>Etiquetas:</strong> ${post.Tags}</p>` : ''}
+                </div>
+                <div class="post-body">${processedContent}</div>
+            `;
             })
             .catch(error => {
                 postContentContainer.innerHTML = '<h1>Error al cargar</h1><p>No se pudo encontrar el contenido.</p>';
