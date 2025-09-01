@@ -117,6 +117,9 @@ function initializePageSpecificScripts() {
     if (postContentContainer) { loadSinglePost(); }
     if (worksGallery) { processWorksGallery(); }
     if (photoGallery) { initializePhotoGallery(); }
+
+    // --- Llamada a la nueva función ---
+    initializeMobileNav();
 }
 
 // --- RESTO DE FUNCIONES ---
@@ -321,3 +324,80 @@ function initializePhotoGallery() {
     });
 }
 // ===== FIN DEL ARCHIVO script.js =====
+// ===== INICIO: LÓGICA PARA LA BARRA DE NAVEGACIÓN MÓVIL (DISEÑO NOTCH) =====
+
+function initializeMobileNav() {
+    const mobileNav = document.getElementById('mobile-nav');
+    if (!mobileNav) return; // Si la barra no existe, no hacemos nada
+
+    // --- 1. Lógica para mostrar/ocultar la barra con el scroll (sin cambios) ---
+    let lastScrollY = window.scrollY;
+    let ticking = false;
+
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            window.requestAnimationFrame(() => {
+                const currentScrollY = window.scrollY;
+                if (currentScrollY > 200 && currentScrollY < lastScrollY) {
+                    mobileNav.classList.add('visible');
+                } else if (currentScrollY > lastScrollY || currentScrollY <= 10) {
+                    mobileNav.classList.remove('visible');
+                }
+                lastScrollY = currentScrollY;
+                ticking = false;
+            });
+            ticking = true;
+        }
+    });
+
+    // --- 2. Lógica MEJORADA para mover el indicador y marcar el icono activo ---
+    const navLinks = mobileNav.querySelectorAll('a');
+    const indicator = mobileNav.querySelector('.nav-indicator');
+
+    function setActiveLink() {
+        const currentPage = window.location.pathname.split('/').pop();
+        let activeLink = null;
+
+        navLinks.forEach(link => {
+            link.classList.remove('active'); // Limpiamos todos los activos primero
+            const linkPage = link.getAttribute('href').split('/').pop();
+            const iconIdentifier = link.dataset.page;
+
+            let isMatch = false;
+            if (currentPage === linkPage) isMatch = true;
+            if (iconIdentifier === 'blog' && currentPage === 'post.html') isMatch = true;
+            if (iconIdentifier === 'galerias' && ['fashion.html', 'runway.html', 'others.html'].includes(currentPage)) isMatch = true;
+            
+            if (isMatch) {
+                activeLink = link;
+            }
+        });
+
+        // Si no se encontró un link (ej: en index.html), se asigna el de inicio
+        if (!activeLink && (currentPage === '' || currentPage === 'index.html')) {
+            activeLink = mobileNav.querySelector('a[data-page="inicio"]');
+        }
+
+        if (activeLink) {
+            activeLink.classList.add('active');
+            
+            // Calculamos la posición y el tamaño del "notch"
+            // offsetLeft es la distancia desde el borde izquierdo del nav
+            const notchLeft = activeLink.offsetLeft + (activeLink.clientWidth / 2) - (indicator.clientWidth / 2);
+            // clientWidth es el ancho del elemento 'a'
+            const notchWidth = activeLink.clientWidth;
+            
+            // Usamos variables CSS para mover el indicador
+            indicator.style.setProperty('--notch-left', `${notchLeft}px`);
+            
+        }
+    }
+
+    // Ejecutamos la función al cargar la página
+    setActiveLink();
+    
+    // Y la volvemos a ejecutar si la ventana cambia de tamaño (para responsividad)
+    window.addEventListener('resize', setActiveLink);
+}
+
+// ===== FIN: LÓGICA PARA LA BARRA DE NAVEGACIÓN MÓVIL =====
