@@ -355,43 +355,42 @@ function initializeMobileNav() {
     const indicator = mobileNav.querySelector('.nav-indicator');
 
     function setActiveLink() {
-        const currentPage = window.location.pathname.split('/').pop();
-        let activeLink = null;
+    const currentPage = window.location.pathname.split('/').pop();
+    let activeLink = null;
 
-        navLinks.forEach(link => {
-            link.classList.remove('active'); // Limpiamos todos los activos primero
-            const linkPage = link.getAttribute('href').split('/').pop();
-            const iconIdentifier = link.dataset.page;
+    // 1. Buscamos si alguna página coincide
+    navLinks.forEach(link => {
+        link.classList.remove('active'); // Limpiamos todos los activos primero
+        const linkPage = link.getAttribute('href').split('/').pop();
+        const iconIdentifier = link.dataset.page;
 
-            let isMatch = false;
-            if (currentPage === linkPage) isMatch = true;
-            if (iconIdentifier === 'blog' && currentPage === 'post.html') isMatch = true;
-            if (iconIdentifier === 'galerias' && ['fashion.html', 'runway.html', 'others.html'].includes(currentPage)) isMatch = true;
-            
-            if (isMatch) {
-                activeLink = link;
-            }
-        });
-
-        // Si no se encontró un link (ej: en index.html), se asigna el de inicio
-        if (!activeLink && (currentPage === '' || currentPage === 'index.html')) {
-            activeLink = mobileNav.querySelector('a[data-page="inicio"]');
+        let isMatch = false;
+        if (currentPage === linkPage) isMatch = true;
+        if (iconIdentifier === 'blog' && currentPage === 'post.html') isMatch = true;
+        if (iconIdentifier === 'galerias' && ['fashion.html', 'runway.html', 'others.html'].includes(currentPage)) isMatch = true;
+        
+        if (isMatch) {
+            activeLink = link;
         }
+    });
 
-        if (activeLink) {
-            activeLink.classList.add('active');
-            
-            // Calculamos la posición y el tamaño del "notch"
-            // offsetLeft es la distancia desde el borde izquierdo del nav
-            const notchLeft = activeLink.offsetLeft + (activeLink.clientWidth / 2) - (indicator.clientWidth / 2);
-            // clientWidth es el ancho del elemento 'a'
-            const notchWidth = activeLink.clientWidth;
-            
-            // Usamos variables CSS para mover el indicador
-            indicator.style.setProperty('--notch-left', `${notchLeft}px`);
-            
-        }
+    if (!activeLink && (currentPage === '' || currentPage === 'index.html')) {
+        activeLink = mobileNav.querySelector('a[data-page="inicio"]');
     }
+
+    // 2. Actuamos según si encontramos una coincidencia o no
+    if (activeLink) {
+        // SÍ hay coincidencia: mostramos el indicador y lo posicionamos
+        indicator.classList.remove('hidden');
+        activeLink.classList.add('active');
+        
+        const notchLeft = activeLink.offsetLeft + (activeLink.clientWidth / 2) - (indicator.clientWidth / 2);
+        indicator.style.setProperty('--notch-left', `${notchLeft}px`);
+    } else {
+        // NO hay coincidencia: ocultamos el indicador
+        indicator.classList.add('hidden');
+    }
+}
 
     // Ejecutamos la función al cargar la página
     setActiveLink();

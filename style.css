@@ -1493,78 +1493,120 @@ body.dark-mode .posts-section .post-card:hover {
     padding-top: 2rem;
 }
 
-/* 2. Media Query: Estilos para pantallas de 768px o menos */
+
+/* ===== ESTILOS PARA LA BARRA DE NAVEGACIÓN MÓVIL (CORREGIDO PARA DESKTOP) ===== */
+
+/* 1. Regla GLOBAL: Por defecto, la barra está COMPLETAMENTE OCULTA en pantallas grandes. */
+.mobile-nav {
+    display: none;
+}
+
+/* 2. Media Query: TODO lo demás SOLO se aplica en pantallas de 768px o menos */
 @media screen and (max-width: 768px) {
     
     .mobile-nav {
-        display: flex; position: fixed; bottom: 25px; left: 50%;
-        transform: translateX(-50%); width: 95%; max-width: 400px; z-index: 1000;
-        background-color: var(--surface-color); border-radius: 25px;
-        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2); padding: 0 10px; height: 65px;
-        opacity: 0; visibility: hidden; transform: translate(-50%, 100px);
+        /* Hacemos que la barra sea visible y la estilizamos */
+        display: flex;
+        position: fixed;
+        bottom: 15px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 95%;
+        max-width: 400px;
+        z-index: 1000;
+        background-color: var(--surface-color);
+        border-radius: 25px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        padding: 0 10px;
+        height: 65px;
+        opacity: 0;
+        visibility: hidden;
+        transform: translate(-50%, 100px);
         transition: transform 0.4s ease, opacity 0.4s ease, visibility 0s 0.4s;
     }
 
     .mobile-nav.visible {
-        opacity: 1; visibility: visible; transform: translateX(-50%);
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(-50%);
         transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.4s ease, visibility 0s 0s;
     }
 
-    /* --- Iconos INACTIVOS --- */
-    .mobile-nav a img {
-        width: 2.5rem; height: 2.5rem;
-        transition: transform 0.3s ease; filter: grayscale(1) opacity(0.5);
-    }
-    body.dark-mode .mobile-nav a img {
-        filter: grayscale(1) opacity(0.7);
-    }
-    
     .mobile-nav a {
-        position: relative; flex: 1; display: flex; flex-direction: column;
-        align-items: center; justify-content: center; z-index: 2;
+        position: relative;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 2;
         transition: transform 0.3s ease;
     }
-    .mobile-nav a span {
-        position: absolute; bottom: 0px; font-size: 0.7rem; font-weight: 500;
-        color: var(--text-color); opacity: 0; transform: translateY(5px);
-        transition: opacity 0.3s ease, transform 0.3s ease;
-    }
-    .mobile-nav a.active span {
-        opacity: 1; transform: translateY(0);
+
+    .mobile-nav a img {
+        width: 2.5rem;
+        height: 2.5rem;
+        transition: transform 0.3s ease;
     }
 
-    /* --- El CÍRCULO DESLIZANTE --- */
+    .mobile-nav a span {
+        position: absolute;
+        bottom: 0px;
+        font-size: 0.7rem;
+        font-weight: 500;
+        color: var(--text-color);
+        opacity: 0;
+        transform: translateY(5px);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+    
+    .mobile-nav a.active span {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
     .nav-indicator {
         position: absolute;
-        width: 55px; height: 55px;
+        width: 55px;
+        height: 55px;
         border-radius: 50%;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         z-index: 1;
         top: -25px;
-        transition: left 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-        left: var(--notch-left, 0);
+        transition: left 0.4s cubic-bezier(0.23, 1, 0.32, 1), transform 0.3s ease, opacity 0.3s ease;
+    left: var(--notch-left, 0);
     }
-    
-}
-    
-/* === LÓGICA DE COLOR FINAL BASADA EN .light-mode === */
 
-/* --- ESTILOS PARA TEMA OSCURO (Estado por defecto, sin clase 'light-mode') --- */
-body:not(.light-mode) .mobile-nav a.active img {
-    transform: translateY(-32px);
-    filter: none; /* Mantiene el SVG en su color original (NEGRO) */
-}
-body:not(.light-mode) .nav-indicator {
-    background-color: #ffffff; /* Círculo BLANCO */
-    /* === LÍNEA AÑADIDA PARA EL EFECTO DE LUZ === */
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
-}
+    /* === LÓGICA DE COLOR FINAL BASADA EN .light-mode === */
 
-/* --- ESTILOS PARA TEMA CLARO (Cuando SÍ está la clase 'light-mode') --- */
-body.light-mode .mobile-nav a.active img {
-    transform: translateY(-32px);
-    filter: brightness(0) invert(1); /* Invierte el SVG a BLANCO */
+    /* --- TEMA OSCURO (Estado por defecto, sin clase 'light-mode') --- */
+    body:not(.light-mode) .mobile-nav a img {
+        filter: grayscale(1) opacity(0.7);
+    }
+    body:not(.light-mode) .mobile-nav a.active img {
+        transform: translateY(-32px);
+        filter: none; /* Mantiene el SVG en su color original (NEGRO) */
+    }
+    body:not(.light-mode) .nav-indicator {
+        background-color: #ffffff; /* Círculo BLANCO */
+        box-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
+    }
+
+    /* --- TEMA CLARO (Cuando SÍ está la clase 'light-mode') --- */
+    body.light-mode .mobile-nav a img {
+        filter: grayscale(1) opacity(0.5);
+    }
+    body.light-mode .mobile-nav a.active img {
+        transform: translateY(-32px);
+        filter: brightness(0) invert(1); /* Invierte el SVG a BLANCO */
+    }
+    body.light-mode .nav-indicator {
+        background-color: #121212; /* Círculo NEGRO */
+    }
+
+    /* Clase para ocultar el indicador cuando no hay un icono activo */
+.nav-indicator.hidden {
+    opacity: 0;
+    transform: scale(0.5); /* Efecto de encogimiento sutil */
 }
-body.light-mode .nav-indicator {
-    background-color: #121212; /* Círculo NEGRO */
 }
