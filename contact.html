@@ -18,22 +18,64 @@
 
     <main class="contact-page">
         <!-- 2. Usamos el contenedor de texto para centrar y limitar el ancho -->
-        <div class="text-content-container">
-            
-            <div class="section-title-lined">
-                <h2>Contacto</h2>
-            </div>
+        <!-- ===== INICIO: SECCIÓN DEL FORMULARIO DE CONTACTO ===== -->
+<div class="contact-page">
+    <h2>Ponte en contacto</h2>
+    <p>Si tienes algún proyecto en mente o quieres saludar, por favor usa el siguiente formulario.</p>
 
-            <p style="text-align: center; margin-bottom: 3rem;">Si tienes alguna pregunta o quieres colaborar, por favor, rellena el siguiente formulario.</p>
-
-            <!-- 3. Aquí va tu iframe de Notion -->
-            <iframe 
-                src="https://brauliofv.notion.site/ebd/25a5a94229d48168a8b2d345562f406c" 
-                style="width: 100%; height: 900px; border: 0; border-radius: 10px;" 
-                allowfullscreen>
-            </iframe>
-
+    <!-- El formulario que enviaremos con JavaScript -->
+    <form id="contact-form" novalidate>
+        
+        <!-- Campo para el Nombre -->
+        <div class="form-group">
+            <label for="name">Nombre</label>
+            <input type="text" id="name" name="name" placeholder="Tu nombre completo" required>
         </div>
+
+        <!-- Campo para el Email -->
+        <div class="form-group">
+            <label for="email">Correo Electrónico</label>
+            <input type="email" id="email" name="email" placeholder="tu@correo.com" required>
+        </div>
+        
+        <!-- Campo para el Teléfono (opcional) -->
+        <div class="form-group">
+            <label for="phone">Teléfono (Opcional)</label>
+            <input type="tel" id="phone" name="phone" placeholder="+52 55 1234 5678">
+        </div>
+        
+        <!-- Campo para el Asunto (opcional) -->
+        <div class="form-group">
+            <label for="asunto">Asunto (Opcional)</label>
+            <input type="text" id="asunto" name="asunto" placeholder="Ej: Propuesta de sesión de fotos">
+        </div>
+
+        <!-- Campo para el Mensaje -->
+        <div class="form-group">
+            <label for="mensaje">Mensaje</label>
+            <textarea id="mensaje" name="mensaje" rows="6" placeholder="Cuéntame más sobre tu proyecto..." required></textarea>
+        </div>
+
+        <!-- Botón de Envío -->
+        <button type="submit" id="submit-button" class="btn">Enviar Mensaje</button>
+
+    </form>
+    
+    <!-- Contenedor para mostrar mensajes de éxito o error -->
+    <div id="form-feedback"></div>
+</div>
+<!-- ===== FIN: SECCIÓN DEL FORMULARIO DE CONTACTO ===== -->
+
+<!-- ===== INICIO: ESTRUCTURA DE LA VENTANA MODAL DE FEEDBACK ===== -->
+<div id="feedback-modal-overlay" class="feedback-modal-overlay"></div>
+<div id="feedback-modal" class="feedback-modal">
+    <div id="feedback-modal-content" class="feedback-modal-content">
+        <!-- El icono y el mensaje se insertarán aquí con JavaScript -->
+    </div>
+    <button id="close-modal-btn" class="btn">Cerrar</button>
+</div>
+<!-- ===== FIN: ESTRUCTURA DE LA VENTANA MODAL DE FEEDBACK ===== -->
+
     </main>
 
     <footer id="footer-placeholder"></footer>

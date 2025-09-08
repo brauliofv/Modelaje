@@ -120,6 +120,88 @@ function initializePageSpecificScripts() {
 
     // --- Llamada a la nueva función ---
     initializeMobileNav();
+     initializeContactForm(); 
+     // ===== INICIO: LÓGICA PARA EL FORMULARIO DE CONTACTO (VERSIÓN ROBUSTA) =====
+
+function initializeContactForm() {
+    const contactForm = document.getElementById('contact-form');
+    // Si no estamos en la página de contacto (no se encuentra el formulario), no hacemos nada.
+    if (!contactForm) return;
+
+    // --- Seleccionamos los elementos del modal y del formulario ---
+    const submitButton = document.getElementById('submit-button');
+    const modalOverlay = document.getElementById('feedback-modal-overlay');
+    const modal = document.getElementById('feedback-modal');
+    const modalContent = document.getElementById('feedback-modal-content');
+    const closeModalBtn = document.getElementById('close-modal-btn');
+
+    // === CORRECCIÓN CLAVE ===
+    // Verificamos que TODOS los elementos necesarios para el modal existan.
+    // Si falta alguno, no podemos continuar.
+    if (!submitButton || !modalOverlay || !modal || !modalContent || !closeModalBtn) {
+        console.error("Error: Faltan uno o más elementos del formulario o del modal en el HTML. Verifica los IDs.");
+        return; // Detenemos la ejecución de esta función para evitar errores.
+    }
+
+    // --- Función para mostrar el modal con un mensaje específico ---
+    function showModal(isSuccess, message) {
+        modalContent.innerHTML = '';
+        const icon = document.createElement('i');
+        icon.className = isSuccess ? 'fas fa-check-circle icon success' : 'fas fa-times-circle icon error';
+        const text = document.createElement('p');
+        text.textContent = message;
+        modalContent.appendChild(icon);
+        modalContent.appendChild(text);
+        modalOverlay.classList.add('visible');
+        modal.classList.add('visible');
+    }
+
+    // --- Función para ocultar el modal ---
+    function closeModal() {
+        modalOverlay.classList.remove('visible');
+        modal.classList.remove('visible');
+    }
+    
+    // --- Event listeners para cerrar el modal ---
+    closeModalBtn.addEventListener('click', closeModal);
+    modalOverlay.addEventListener('click', closeModal);
+
+    // --- Event listener principal del formulario ---
+    contactForm.addEventListener('submit', async (event) => {
+        // Esta línea ahora SÍ se ejecutará
+        event.preventDefault();
+        
+        const formData = new FormData(contactForm);
+        const formObject = Object.fromEntries(formData.entries());
+
+        submitButton.disabled = true;
+        submitButton.textContent = 'Enviando...';
+
+        try {
+            const response = await fetch('/api/submit-form',  {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formObject),
+            });
+            
+            const result = await response.json();
+            if (!response.ok) {
+                throw new Error(result.message || 'Ocurrió un error en el servidor.');
+            }
+            
+            showModal(true, result.message);
+            contactForm.reset();
+
+        } catch (error) {
+            showModal(false, `Error: ${error.message}`);
+        } finally {
+            submitButton.disabled = false;
+            submitButton.textContent = 'Enviar Mensaje';
+        }
+    });
+}
+
+// ===== FIN: LÓGICA PARA EL FORMULARIO DE CONTACTO =====
 }
 
 // --- RESTO DE FUNCIONES ---
@@ -400,3 +482,65 @@ function initializeMobileNav() {
 }
 
 // ===== FIN: LÓGICA PARA LA BARRA DE NAVEGACIÓN MÓVIL =====
+
+// ===== INICIO: LÓGICA PARA EL FORMULARIO DE CONTACTO =====
+
+function initializeContactForm() {
+    // Buscamos el formulario en la página
+    const contactForm = document.getElementById('contact-form');
+    // Si no estamos en la página de contacto, no hacemos nada
+    if (!contactForm) return;
+
+    const feedbackContainer = document.getElementById('form-feedback');
+    const submitButton = document.getElementById('submit-button');
+
+    // Escuchamos el evento 'submit' del formulario
+    contactForm.addEventListener('submit', async (event) => {
+        // Prevenimos que el formulario se envíe de la forma tradicional (recargando la página)
+        event.preventDefault();
+
+        // 1. Recolectamos los datos del formulario
+        const formData = new FormData(contactForm);
+        const formObject = Object.fromEntries(formData.entries());
+
+        // 2. Deshabilitamos el botón para evitar envíos múltiples
+        submitButton.disabled = true;
+        submitButton.textContent = 'Enviando...';
+        feedbackContainer.textContent = ''; // Limpiamos mensajes anteriores
+
+        try {
+            // 3. Enviamos los datos a nuestro servidor con 'fetch'
+            const response = await fetch('http://localhost:3000/submit-form', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formObject),
+            });
+            
+            // 4. Analizamos la respuesta del servidor
+            const result = await response.json();
+
+            if (!response.ok) {
+                // Si el servidor respondió con un error (ej: status 500)
+                throw new Error(result.message || 'Ocurrió un error en el servidor.');
+            }
+            
+            // Si todo fue bien, mostramos el mensaje de éxito
+            feedbackContainer.textContent = result.message;
+            feedbackContainer.style.color = 'var(--primary-color-hover)'; // Color de éxito
+            contactForm.reset(); // Limpiamos el formulario
+
+        } catch (error) {
+            // Si hay un error en la comunicación o del servidor, lo mostramos
+            feedbackContainer.textContent = `Error: ${error.message}`;
+            feedbackContainer.style.color = 'red'; // Color de error
+        } finally {
+            // 5. Reactivamos el botón al final, ya sea éxito o error
+            submitButton.disabled = false;
+            submitButton.textContent = 'Enviar Mensaje';
+        }
+    });
+}
+
+// ===== FIN: LÓGICA PARA EL FORMULARIO DE CONTACTO =====

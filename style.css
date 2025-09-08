@@ -1610,3 +1610,149 @@ body.dark-mode .posts-section .post-card:hover {
     transform: scale(0.5); /* Efecto de encogimiento sutil */
 }
 }
+
+
+/* ===== ESTILOS PARA LA PÁGINA DE CONTACTO Y FORMULARIO ===== */
+
+/* Contenedor principal de la página de contacto */
+.contact-page {
+    max-width: 800px;
+    margin: 4rem auto; /* Centra la sección */
+    padding: 0 2rem;
+}
+
+.contact-page h2 {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.contact-page p {
+    text-align: center;
+    color: var(--text-color-light);
+    margin-bottom: 3rem;
+}
+
+/* Grupo de cada campo (label + input) */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--text-color-light);
+}
+
+/* Estilo para todos los campos de entrada y el textarea */
+.contact-page input[type="text"],
+.contact-page input[type="email"],
+.contact-page input[type="tel"],
+.contact-page textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--text-color-light);
+    border-radius: 8px;
+    background-color: var(--surface-color);
+    color: var(--text-color);
+    font-size: 1rem;
+    box-sizing: border-box; /* Asegura que el padding no afecte el ancho */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Efecto al hacer focus (clic) en un campo */
+.contact-page input[type="text"]:focus,
+.contact-page input[type="email"]:focus,
+.contact-page input[type="tel"]:focus,
+.contact-page textarea:focus {
+    outline: none;
+    border-color: var(--primary-color-hover);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.4); /* Sombra de color al hacer focus */
+}
+
+/* Alineación del botón */
+#contact-form button {
+    display: block;
+    width: 100%;
+    margin-top: 1rem;
+}
+
+
+/* ===== ESTILOS PARA LA VENTANA MODAL DE FEEDBACK ===== */
+
+/* Fondo oscuro semitransparente */
+.feedback-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 1001; /* Por encima de todo, excepto el modal */
+    
+    /* Oculto por defecto */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0s 0.3s;
+}
+
+/* El contenedor del mensaje */
+.feedback-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.9); /* Centrado y ligeramente encogido */
+    z-index: 1002; /* Por encima del overlay */
+    
+    background-color: var(--surface-color);
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+
+    /* Oculto por defecto */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s 0.3s;
+}
+
+/* --- Clases para mostrar el modal --- */
+.feedback-modal-overlay.visible,
+.feedback-modal.visible {
+    opacity: 1;
+    visibility: visible;
+    transition-delay: 0s; /* Quitamos el retraso para la transición de entrada */
+}
+
+.feedback-modal.visible {
+    transform: translate(-50%, -50%) scale(1); /* Vuelve a su tamaño normal */
+}
+
+/* Contenido del modal (el mensaje) */
+.feedback-modal-content p {
+    margin: 1rem 0 1.5rem 0;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--text-color);
+}
+
+/* Icono dentro del modal (lo añadiremos con JS) */
+.feedback-modal-content .icon {
+    font-size: 3rem; /* Tamaño grande para el icono */
+}
+
+.feedback-modal-content .icon.success {
+    color: #22c55e; /* Verde para éxito */
+}
+
+.feedback-modal-content .icon.error {
+    color: #ef4444; /* Rojo para error */
+}
+
+/* Botón de cerrar del modal */
+#feedback-modal #close-modal-btn {
+    width: 100%;
+}
