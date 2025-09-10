@@ -104,6 +104,54 @@ body {
     transition: background-color 0.3s, color 0.3s;
 }
 
+
+/* ===== INICIO: ESTILOS PARA LA MARCA DE AGUA (MÉTODO CORRECTO) ===== */
+
+/* Creamos una capa virtual '::before' en el body */
+body::before {
+    /* 1. Obligatorio para que el pseudo-elemento exista */
+    content: '';
+    
+    /* 2. Lo posicionamos para que cubra toda la pantalla y se quede fijo */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    /* 3. LA CLAVE: Lo pone DETRÁS de todo el contenido de la página */
+    z-index: -1;
+
+    /* 4. Ahora, aplicamos la imagen y sus propiedades a ESTA CAPA */
+    background-image: url('assets/img/tigre-blanco.svg');
+    background-repeat: no-repeat;
+    background-position: center center;
+    
+    /* NOTA: Ajusta este valor para el tamaño */
+    background-size: 120vh;
+
+    /* 5. Transición suave para los cambios de tema */
+    transition: opacity 0.3s ease, filter 0.3s ease;
+}
+
+/* --- TEMA OSCURO (por defecto) --- */
+body:not(.light-mode)::before {
+    /* NOTA: Ajusta este valor para la transparencia en el tema oscuro */
+    opacity: 0.03;
+}
+
+/* --- TEMA CLARO (cuando está la clase .light-mode) --- */
+body.light-mode::before {
+    /* Invierte el color del SVG blanco a negro */
+    filter: invert(1);
+    
+    /* NOTA: Ajusta este valor para la transparencia en el tema claro */
+    opacity: 0.02;
+}
+
+/* ===== FIN: ESTILOS PARA LA MARCA DE AGUA (MÉTODO CORRECTO) ===== */
+
+
 a {
     color: var(--primary-color);
     text-decoration: none;
@@ -126,17 +174,19 @@ main {
 .btn {
     display: inline-block;
     padding: 10px 20px;
-    background-color: var(--primary-color);
-    color: var(--btn-text-color);
+    background-color: #C12B2B; /* <-- COLOR CRIMSON AÑADIDO */
+    color: #FFFFFF; /* <-- Texto blanco para que contraste */
     border-radius: 5px;
     font-weight: bold;
     text-transform: uppercase;
     transition: background-color 0.3s ease;
+    border: none; /* Opcional: quita cualquier borde residual */
 }
 
 .btn:hover {
-    background-color: var(--primary-color-hover);
-    color: var(--btn-text-color);
+    /* Un rojo un poco más oscuro para el efecto hover */
+    background-color: #a52424; 
+    color: #FFFFFF;
 }
 
 /* Barra de Navegación */
@@ -310,31 +360,34 @@ body.light-mode .post-card {
 
 /* Footer */
 footer {
-    background-color: #000000;
     color: #dadada;
     --primary-color: #ffffff;
-    padding: 3rem 5%;
-    margin: 0 30px 30px 30px;
-    border-radius: 20px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    background-color: #000000; /* Lo movemos aquí para que el fondo sea continuo */
+    padding: 2rem 30px; /* Un poco de padding arriba y abajo, y en los lados */
 }
 
 .footer-container {
+    /* Aquí los cambios principales para la distribución */
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around; /* Distribuye el espacio entre las columnas */
     flex-wrap: wrap;
     gap: 2rem;
     padding-bottom: 2rem;
-    border-bottom: 1px solid #333;
+    
+    
+    /* Centramos el contenedor principal en la página */
+    margin: 0 auto;
+    max-width: 1400px; /* Limita el ancho del footer en monitores grandes */
 }
 
 .footer-column {
-    flex: 1;
+    /* Quitamos el flex: 1 para que las columnas tengan su ancho natural */
     min-width: 250px;
+    flex-grow: 1; /* Permite que las columnas crezcan para ocupar el espacio disponible */
 }
 
 .footer-column h3 {
-    color: #ffffff;
+    color: #c8a24a;
     margin-bottom: 1.5rem;
 }
 
@@ -351,9 +404,10 @@ footer {
     background-color: #ffffff;
     color: #121212;
     padding: 15px;
-    border-radius: 5px;
+    border-radius: 9px;
     text-align: center;
     margin-top: 1rem;
+    border: 2px solid #c8a24a;
 }
 
 .social-links a {
@@ -379,8 +433,15 @@ footer {
 }
 
 .footer-bottom {
+    /* Estos estilos se aplicarán a la sección de abajo */
     text-align: center;
-    padding-top: 2rem;
+    padding: 2rem 30px 0;
+    margin: 0 auto;
+    max-width: 900px; /* Limita el ancho del texto para una mejor lectura */
+}
+
+.footer-bottom p {
+    line-height: 1.5; /* Mejora la legibilidad del texto */
 }
 
 .stop-scams-logo {
@@ -389,10 +450,16 @@ footer {
     filter: invert(0.7);
 }
 
-
 /* ----- Responsive ----- */
 @media screen and (max-width: 768px) {
     
+    .footer-column {
+        text-align: center;
+    }
+    
+    .footer-container {
+        justify-content: center; /* Centra las columnas cuando se apilan */
+    }
 
     .burger {
         display: block;
@@ -403,7 +470,6 @@ footer {
         to { opacity: 1; transform: translateX(0px); }
     }
 
-    
 
     .about-me-content {
         flex-direction: column;
@@ -497,7 +563,7 @@ footer {
 .close-menu {
     cursor: pointer;
     font-size: 1.8rem;
-    color: red;
+    color: #C12B2B;
     background: none;
     border: none;
     padding: 0;
@@ -610,13 +676,14 @@ footer {
 .works-title {
     text-align: center;
     margin-bottom: 4rem;
+    
 }
 
 .works-title h2 {
     font-weight: 300;
     font-size: 1rem;
     letter-spacing: 0.5rem;
-    color: var(--text-color-light);
+    color: #c8a24a;
     text-transform: uppercase;
     position: relative;
     display: inline-block;
@@ -689,6 +756,7 @@ footer {
 .gallery-item {
     overflow: hidden;
     border-radius: 15px;
+    border: 1px solid #C8A24A;
 }
 
 .gallery-item img {
@@ -801,7 +869,7 @@ footer {
 .bio-link-item h4 a {
     font-size: 1.2rem;
     font-weight: 500;
-    color: var(--text-color);
+    color: #c8a24a;
     text-decoration: underline;
     text-decoration-thickness: 1px;
     text-underline-offset: 6px;
@@ -847,7 +915,7 @@ footer {
     font-weight: 300;
     font-size: 1rem;
     letter-spacing: 0.5rem;
-    color: var(--text-color-light);
+    color: #c8a24a;
     text-transform: uppercase;
     position: relative;
     display: inline-block;
@@ -924,8 +992,9 @@ footer {
 .cta-button {
     display: inline-block;
     padding: 12px 30px;
-    border: 1px solid var(--text-color-light);
-    color: var(--text-color);
+    border: 1px solid #C12B2B; /* Borde Crimson */
+    color: #C12B2B; /* Texto Crimson */
+    background-color: transparent; /* Fondo transparente (estilo "outline") */
     text-transform: uppercase;
     font-size: 1rem;
     letter-spacing: 0.1rem;
@@ -933,9 +1002,9 @@ footer {
 }
 
 .cta-button:hover {
-    background-color: var(--primary-color);
-    border-color: var(--primary-color);
-    color: var(--btn-text-color);
+    background-color: #C12B2B; /* Al pasar el ratón, se rellena de Crimson */
+    border-color: #C12B2B;
+    color: #FFFFFF; /* El texto se vuelve blanco */
 }
 
 
@@ -965,7 +1034,7 @@ footer {
     font-weight: 300;
     font-size: 1rem;
     letter-spacing: 0.5rem;
-    color: var(--text-color-light);
+    color: #c8a24a;
     text-transform: uppercase;
     position: relative;
     display: inline-block;
@@ -1045,6 +1114,7 @@ footer {
     color: var(--btn-text-color);
 }
 
+
 /* Enlace "Todos los posts" */
 .view-all-posts-minimal a {
     color: var(--text-color-light);
@@ -1061,18 +1131,26 @@ footer {
     gap: 10px; margin-bottom: 4rem;
 }
 .filter-btn {
-    background-color: var(--surface-color); border: 1px solid var(--text-color-light);
-    color: var(--text-color-light); padding: 8px 18px; border-radius: 5px;
-    cursor: pointer; font-weight: 400; text-transform: none;
-    font-size: 0.9rem; transition: all 0.3s ease;
+    background-color: var(--surface-color); 
+    border: 1px solid #C12B2B;
+    color: #C12B2B; 
+    padding: 8px 18px; 
+    border-radius: 5px;
+    cursor: pointer; 
+    font-weight: 400; 
+    text-transform: none;
+    font-size: 0.9rem; 
+    transition: all 0.3s ease;
 }
 .filter-btn:hover {
-    background-color: var(--surface-color); border-color: var(--primary-color);
-    color: var(--primary-color);
+    background-color: var(--surface-color); 
+    border-color: #2E7D32;
+    color: #2E7D32;
 }
 .filter-btn.active {
-    background-color: var(--primary-color); border-color: var(--primary-color);
-    color: var(--btn-text-color);
+    background-color: #C12B2B; 
+    border-color: #C12B2B;
+    color: #ffffff;
 }
 
 /* 1. Estilos para la tarjeta de post en la página del blog */
@@ -1234,15 +1312,14 @@ body.dark-mode .posts-section .post-card:hover {
 /* Títulos principales de sección (H2) */
 .course-page-container h2 {
     font-size: 2rem;
-    font-weight: 500;
+    font-weight: 550;
     margin-bottom: 1rem;
-    color: var(--header-text-color);
 }
 
 /* Subtítulos de sección (H3) */
 .course-page-container h3 {
     font-size: 1.8rem;
-    font-weight: 500;
+    font-weight: 550;
     margin-bottom: 2rem;
     color: var(--header-text-color);
 }
@@ -1273,6 +1350,7 @@ body.dark-mode .posts-section .post-card:hover {
     width: 100%;
     border-radius: 15px;
     margin: 2rem 0 4rem 0;
+    border: 2px solid #C8A24A;
 }
 
 /* Contenedor para el botón final */
@@ -1310,7 +1388,7 @@ body.dark-mode .posts-section .post-card:hover {
 
 .testimonials-header h2 {
     font-size: 2.5rem;
-    color: var(--header-text-color);
+    color: #C8A24A;
     margin-bottom: 1rem;
 }
 
@@ -1336,7 +1414,7 @@ body.dark-mode .posts-section .post-card:hover {
 /* Tarjeta de testimonio individual */
 .testimonial-card {
     background-color: var(--surface-color);
-    border: 1px solid rgba(128, 128, 128, 0.1);
+    border: 1px solid rgba(200, 162, 74, 0.91);
     border-radius: 15px;
     padding: 2rem;
     text-align: center;
@@ -1444,7 +1522,8 @@ body.dark-mode .posts-section .post-card:hover {
 /* Nuevo contenedor para imagen + texto */
 .lightbox-content {
     background-color: #fff; /* Fondo blanco para el contenido */
-    border-radius: 10px;
+    border-radius: 12px;
+    border: 1px solid #C8A24A;
     overflow: hidden;
     max-width: 90vw; /* Máximo ancho relativo a la pantalla */
     max-height: 90vh; /* Máxima altura relativa a la pantalla */
@@ -1756,3 +1835,4 @@ body.dark-mode .posts-section .post-card:hover {
 #feedback-modal #close-modal-btn {
     width: 100%;
 }
+
