@@ -1681,7 +1681,7 @@ body.dark-mode .posts-section .post-card:hover {
 
     /* --- TEMA OSCURO (Estado por defecto, sin clase 'light-mode') --- */
     body:not(.light-mode) .mobile-nav a img {
-        filter: grayscale(1) opacity(0.7);
+        filter: invert(1) opacity(0.5);
     }
     body:not(.light-mode) .mobile-nav a.active img {
         transform: translateY(-32px);
