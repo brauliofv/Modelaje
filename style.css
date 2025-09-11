@@ -1052,11 +1052,11 @@ footer {
 }
 
 .section-title-lined h2::before {
-    left: -40px;
+    left: -25px;
 }
 
 .section-title-lined h2::after {
-    right: -40px;
+    right: -25px;
 }
 
 /* Contenedor de las tarjetas de posts */

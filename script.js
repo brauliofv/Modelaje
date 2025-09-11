@@ -118,6 +118,8 @@ function initializePageSpecificScripts() {
     if (worksGallery) { processWorksGallery(); }
     if (photoGallery) { initializePhotoGallery(); }
 
+    // --- Llamada a la nueva función de filtro de fotografía ---
+    initializePhotographyFilters();
     // --- Llamada a la nueva función ---
     initializeMobileNav();
      initializeContactForm(); 
@@ -298,6 +300,73 @@ function setupFilters() {
     });
 }
 
+// ===== INICIO: LÓGICA PARA EL FILTRO DE LA GALERÍA DE FOTOGRAFÍA =====
+// ===== INICIO: LÓGICA PARA EL FILTRO DE LA GALERÍA DE FOTOGRAFÍA (VERSIÓN MEJORADA) =====
+function initializePhotographyFilters() {
+    // 1. Buscamos el contenedor de los botones de filtro.
+    const filterContainer = document.getElementById('photography-filters');
+    // Si no estamos en la página de fotografía, no hacemos nada más.
+    if (!filterContainer) return;
+
+    // 2. Seleccionamos los elementos con los que vamos a trabajar.
+    const filterButtons = filterContainer.querySelectorAll('.filter-btn');
+    const galleryItems = document.querySelectorAll('#photography-gallery-grid .gallery-photo-item');
+
+    // 3. Creamos una función reutilizable para aplicar el filtro.
+    //    Esto evita repetir código y hace todo más limpio.
+    const applyFilter = (category) => {
+        galleryItems.forEach(item => {
+            // Si la categoría es 'all' o si la categoría del item coincide, lo mostramos.
+            if (category === 'all' || item.dataset.category === category) {
+                item.style.display = 'block';
+            } else {
+                // Si no, lo ocultamos.
+                item.style.display = 'none';
+            }
+        });
+    };
+    
+    // 4. Añadimos el evento 'click' a cada botón.
+    filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            // a. Gestionamos la clase 'active' para el estilo visual.
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+            
+            // b. Obtenemos la categoría del botón en el que se hizo clic.
+            const selectedCategory = button.dataset.category;
+            
+            // c. Llamamos a nuestra función para que aplique el filtro.
+            applyFilter(selectedCategory);
+        });
+    });
+
+    // ===== INICIO DE LA NUEVA LÓGICA: LEER LA URL =====
+    // Esto se ejecuta solo una vez, cuando la página carga.
+    
+    // a. Creamos un objeto para leer los parámetros de la URL actual.
+    const params = new URLSearchParams(window.location.search);
+    // b. Buscamos un parámetro llamado 'category'. Si no existe, será 'null'.
+    const categoryFromURL = params.get('category'); 
+
+    // c. Si encontramos una categoría en la URL (ej: "runway").
+    if (categoryFromURL) {
+        // d. Buscamos el botón que corresponde a esa categoría.
+        const targetButton = filterContainer.querySelector(`.filter-btn[data-category="${categoryFromURL}"]`);
+        
+        // e. Si encontramos el botón...
+        if (targetButton) {
+            // f. ...¡simulamos un clic en él!
+            // Esto es muy eficiente porque reutiliza toda la lógica de clic que ya programamos.
+            targetButton.click(); 
+        }
+    }
+    // ===== FIN DE LA NUEVA LÓGICA =====
+}
+// ===== FIN: LÓGICA PARA EL FILTRO DE LA GALERÍA DE FOTOGRAFÍA =====
+// ===== FIN: LÓGICA PARA EL FILTRO DE LA GALERÍA DE FOTOGRAFÍA =====
+
+
 function navSlide() {
     const burger = document.querySelector('.burger');
     const nav = document.querySelector('.nav-links');
@@ -449,7 +518,7 @@ function initializeMobileNav() {
         let isMatch = false;
         if (currentPage === linkPage) isMatch = true;
         if (iconIdentifier === 'blog' && currentPage === 'post.html') isMatch = true;
-        if (iconIdentifier === 'galerias' && ['fashion.html', 'runway.html', 'others.html'].includes(currentPage)) isMatch = true;
+        if (iconIdentifier === 'galerias' && currentPage === 'photography.html') isMatch = true;
         
         if (isMatch) {
             activeLink = link;

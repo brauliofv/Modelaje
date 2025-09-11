@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -11,21 +9,277 @@
 </head>
 
 <body class="home-photography-style">
-
-
+<!-- ===== INICIO DE LA PANTALLA DE CARGA (SPLASH SCREEN) ===== -->
+    <div id="splash-screen">
+        <div class="splash-content">
+            <div class="line top-line"></div>
+            <div class="brand-name">PHOTOGRAPHY</div>
+            <div class="line bottom-line"></div>
+        </div>
+    </div>
     <header id="header-placeholder"></header>
 
     <main>
-        <section class="page-content" style="padding: 4rem 5%; text-align: center;">
-            <h1>Mi Portafolio de Fotografía</h1>
-            <p>Aquí puedes mostrar tu galería de fotos. Esta es una sección de marcador de posición.</p>
-            <!-- Aquí iría tu galería de imágenes -->
+        <section class="gallery-page-section">
+            <div class="section-title-lined">
+                <h2>Photography Portfolio</h2>
+            </div>
+            
+            <!-- ===== INICIO: BOTONES DE FILTRO (COMO EN BLOG.HTML) ===== -->
+            <div class="filter-buttons" id="photography-filters">
+                <button class="filter-btn active" data-category="all">All</button>
+                <button class="filter-btn" data-category="fashion">Fashion</button>
+                <button class="filter-btn" data-category="runway">Runway</button>
+                <button class="filter-btn" data-category="others">Others</button>
+            </div>
+            <!-- ===== FIN: BOTONES DE FILTRO ===== -->
+
+
+            <!-- ===== INICIO: GALERÍA UNIFICADA ===== -->
+            <!-- El ID 'photography-gallery-grid' es importante para que lo encuentre el JavaScript -->
+            <div class="photo-gallery-grid" id="photography-gallery-grid">
+
+<!-- ===== FOTOS DE FASHION ===== -->
+                <div class="gallery-photo-item" data-category="fashion" data-description="- Foto: <strong>Braulio Fuentes</strong> - Workshop de fotografía de moda">
+                    <img src="assets/img/fashion/mujer2.jpg" alt="Mujer de perfil con vestido blanco">
+                </div>
+                <div class="gallery-photo-item" data-category="fashion" data-description="- Modelo: <strong>Zaira</strong> - Falda: <strong>Angel Grave</strong> - Foto: <strong>Braulio Fuentes</strong>">
+                    <img src="assets/img/fashion/zaira-angel.jpg" alt="La modelo Zaira con falda blanca larga de Angel Grave ">
+                </div>
+                <div class="gallery-photo-item" data-category="fashion" data-description="- Dirección: <strong>Obed Animas</strong> - Foto: <strong>Braulio Fuentes</strong> - Modelo: <strong>Gaby</strong> - Maquillaje y peinado: Arafhad Mejia - Vestido: Marcela Tejeda">
+                    <img src="assets/img/fashion/gaby1.jpg" alt="Modelo con vestido azul brillante con Bellas Artes de fondo en la CDMX">
+                </div>
+                <div class="gallery-photo-item" data-category="fashion" data-description="- Modelo: <strong>America</strong> - Foto: <strong>Braulio Fuentes</strong>">
+                    <img src="assets/img/fashion/america1.jpg" alt="Modelos con vestido azul mate mostrando un hombro con una mirada desafiante con un fondo blanco con papeles arrugados">
+                </div>
+                <div class="gallery-photo-item" data-category="fashion" data-description="- Modelo: <strong>Dan</strong> - Foto: <strong>Braulio Fuentes</strong>">
+                    <img src="assets/img/fashion/dan-22-mayo.jpg" alt="Modelos enmarcando su rostro con las manos, de cabello negro largo y fondo de colores vividos en horizontal">
+                </div>
+                <div class="gallery-photo-item" data-category="fashion" data-description="- Modelo: <strong>Bianka</strong> - Foto: <strong>Braulio Fuentes</strong>">
+                    <img src="assets/img/fashion/alternativa.jpg" alt="Modelo sosteniendo una copa y un cigarrillo, cabello naranja y tatuajes, con una actitud desafiente y fondo completamente negro">
+                </div>
+                <div class="gallery-photo-item" data-category="fashion" data-description="- Modelo: <strong>Ellian Monter</strong> - Foto: <strong>Braulio Fuentes</strong> - Vestuario: <strong>YZ3</strong>">
+                    <img src="assets/img/fashion/ellian-04-yz3-destruccion-de-modaz.jpg" alt="Ellian Monter tiene una expresión eterea con ropa alternativa y fondo de ladrillos de colores, ella está acostada sobre unas llantas de coche">
+                </div>
+                <div class="gallery-photo-item" data-category="fashion" data-description="- Modelo: <strong>Eva</strong> - Foto: <strong>Braulio Fuentes</strong>">
+                    <img src="assets/img/fashion/eva00.jpg" alt="Modelo enmarcando su rostro con las manos en blanco y negro, con una expresión seria y fondo blanco">
+                </div>
+                <div class="gallery-photo-item" data-category="fashion" data-description="- Modelo: <strong>Eloy Monter</strong> - Foto: <strong>Braulio Fuentes</strong> - Vestuario: <strong>Edgar Uriel</strong>">
+                    <img src="assets/img/fashion/eloy1.jpg" alt="Eloy Monter con una mirada dominante, viste una kufiya, torso desnudo con tatuajes, de fondo tiene el mar y cielo azul profundo a medio día">
+                </div>
+                <div class="gallery-photo-item" data-category="fashion" data-description="- Dirección: <strong>Obed Animas</strong> - Modelo: <strong>Dan</strong> - Foto: <strong>Braulio Fuentes</strong> - Maquillaje: <strong>Araphat Mejia</strong> - Vestuario: <strong>Marcela Tejeda</strong>">
+                    <img src="assets/img/fashion/dan1.jpg" alt="Modelo con maquillaje con motivos del mar en tonos azul, fondo blanco, ella viste una blusa azul con escote en V, cabello suelto y rizado">
+                </div>
+                <div class="gallery-photo-item" data-category="fashion" data-description="- Modelo: <strong>Frida</strong> - Foto: <strong>Braulio Fuentes</strong> - Vestuario: <strong>Edgar Uriel</strong>">
+                    <img src="assets/img/fashion/frida1.jpg" alt="Chica vestida de novia sentada al aire libre con fondo verde de los arbustos y completamente iluminada por el sol">
+                </div>
+                <div class="gallery-photo-item" data-category="fashion" data-description="- Modelo: <strong>Luisa Baldo</strong> - Foto: <strong>Braulio Fuentes</strong>">
+                    <img src="assets/img/fashion/luisa1.jpg" alt="Luisa Baldo con una expresión seria, cabello suelto, top azul marino y saco blanco marfil y de fondo la gente de la ciuddad en la calle Madero en CDMX">
+                </div>
+                <div class="gallery-photo-item" data-category="fashion" data-description="- Modelo: <strong>Melissa Moreno</strong> - Foto: <strong>Braulio Fuentes</strong>">
+                    <img src="assets/img/fashion/melissa1.jpg" alt="Melissa Moreno con una expresión retadora y alternativa en blanco y negro en fondo completamente negro">
+                </div>
+                <div class="gallery-photo-item" data-category="fashion" data-description="- Dirección: <strong>Obed Animas</strong> - Modelo: <strong>Mila</strong> - Foto: <strong>Braulio Fuentes</strong> - Vestuario: <strong>Hugo Vitas</strong>">
+                    <img src="assets/img/fashion/mila1.jpg" alt="Modelos con vestido de alta costura color negro, ella muy eterea con expresión serie, manos a la cadera y de fondo las puertas doradas del edificio de Correos de México">
+                </div>
+                <div class="gallery-photo-item" data-category="fashion" data-description="Workshop de fotografía de moda - Foto: <strong>Braulio Fuentes</strong>">
+                    <img src="assets/img/fashion/mujer1.jpg" alt="Modelos con peinado de los 60's y expresión serena">
+                </div>
+                <div class="gallery-photo-item" data-category="fashion" data-description="- Modelo: <strong>Ximena Salazar</strong>
+- Fotografía: <strong>Braulio Fuentes</strong>
+- Maquillaje y Peinado: <strong>Arafhad Mejía</strong>
+- Joyería: <strong>Mariana Barranco</strong>
+<br>
+- Moda por <strong>UVM Puebla</strong>
+- Dirección y Styling: <strong>Obed Animas</strong>
+- Producción: <strong>MP Producción</strong>">
+                    <img src="assets/img/fashion/ninamp.jpg" alt="Modelo de cabello suelto y largo con lentes oscuros, viste un saco verde con una minifalda verde botella y unos botines negros apoyandose en las rejas de una iglesia de la calle Madero de la CDMX">
+                </div>
+                <div class="gallery-photo-item" data-category="fashion" data-description="
+                - Dirección creativa: <strong>Obed Animas</strong> - Fotografía: <strong>Braulio Fuentes</strong> - Modelos: <strong>Soy Dario y Obed Animas</strong> - Maquillaje: <strong>Arafhad</strong> - Moda:<strong>NECIO</strong>
+                ">
+                    <img src="assets/img/fashion/oa1.jpg" alt="Dos hombres tomados de las manos bajando las escaleras a medio día">
+                </div>
+                <div class="gallery-photo-item" data-category="fashion" data-description="- Dirección y vestuario: <strong>Valeria AVC</strong> - Foto: <strong>Braulio Fuentes</strong> - Modelo: <strong>Simon</strong>">
+                    <img src="assets/img/fashion/oronegro.jpg" alt="Modelo con expresión de tristeza, ella tiene alas manchadas de negro y todo su cuerpo y vestimenta en dorado con un fondo completamente negro">
+                </div>
+                <div class="gallery-photo-item" data-category="fashion" data-description="Peinado: <strong>Philippe Vanta</strong> - Foto: <strong>Braulio Fuentes</strong>">
+                    <img src="assets/img/fashion/philip1.jpg" alt="Modelo de cabello corto con un peinado voluminoso">
+                </div>
+                <div class="gallery-photo-item" data-category="fashion" data-description="
+                - Coordinación: <strong>MPproduccion</strong>
+                - Dirección de arte: <strong>Obed Animas</strong>
+                - Fotografía: <strong>Braulio Fuentes</strong>
+                <br>
+                - Modelos: <strong>Yitzhak Antonio y Carmen</strong>
+                - Filmmaker: <strong>Jorge Ponce</strong>
+                - Maquillaje y peinado: <strong>Arafhad Mejía</strong>
+                - Vestuario: <strong>Nestor</strong>
+                ">
+                    <img src="assets/img/fashion/tlatelolco-mp-2.jpg" alt="Dos modelos en Tlatelolco tumbados al borde de las escaleras de la plaza simulando su muerte con una tela que representa la sangre derramada en memoria del movimiento del 68">
+                </div>
+                <div class="gallery-photo-item" data-category="fashion" data-description="
+                - Coordinación: <strong>MPproduccion</strong>
+                - Dirección de arte: <strong>Obed Animas</strong>
+                - Fotografía: <strong>Braulio Fuentes</strong>
+                - Filmmaker: <strong>Jorge Ponce</strong>
+                <br>
+                - Modelos: <strong>Carmen, Itzel Glez,Yitzhak Antonio</strong>
+                - Maquillaje y peinado: <strong>Arafhad Mejía</strong>
+                - Vestuario: <strong>Nestor</strong>
+                ">
+                    <img src="assets/img/fashion/tlatelolco-mp-6.jpg" alt="Dos chicas y un chico de rodillas en frende de la iglesia de la plaza de Tlatelolco simulando sometimiento para su fusilameinto en memoria del movimiento del 68">
+                </div>
+                <div class="gallery-photo-item" data-category="fashion" data-description="
+                - Dirección creativa: <strong>Obed Animas</strong> - Fotografía: <strong>Braulio Fuentes</strong> - Modelos: <strong>Soy Dario y Obed Animas</strong> - Maquillaje: <strong>Arafhad</strong> - Moda:<strong>NECIO</strong>
+                ">
+                    <img src="assets/img/fashion/oa2.jpg" alt="Dos hombres en el marco del orgullo debajo de unos arcos de colores de cristal a medio día">
+                </div>
+                <div class="gallery-photo-item" data-category="fashion" data-description="Modelo: <strong>Zaira</strong> - Falda: <strong>Angel Grave</strong> - Dirección: <strong>Obed Animas</strong> - Foto: <strong>Braulio Fuentes</strong> - Maquillaje: <strong>Arafat Mejia</strong>
+                    ">
+                    <img src="assets/img/fashion/zaira-angel1.jpg" alt="Modelo morena sentada junto al muro de granito con vestido corto y negro">
+                </div>
+                <div class="gallery-photo-item" data-category="fashion" data-description="- Modelo: <strong>Luisa Baldo</strong>
+                - Foto: <strong>Braulio Fuentes</strong>">
+                    <img src="assets/img/fashion/luisa2.jpg" alt="Retrato de Luisa Baldo">
+                </div>
+
+<!-- ===== FOTOS DE RUNWAY ===== -->
+                <div class="gallery-photo-item" data-category="runway" data-description="- <strong>Fashion Week México</strong> - Diseñador: <strong>Benito Santos</strong> - Fotógrafo: <strong>Braulio Fuentes</strong>">
+                    <img src="assets/img/runway/0290-wall.jpg" alt="Modelo en pasarela apoyada sobre una cerca de madera blanca y fondo oscuro">
+                </div>
+                <div class="gallery-photo-item" data-category="runway" data-description="- <strong>Fashion Week México</strong> - Fotografía de Pasarela: <strong>Braulio Fuentes</strong>">
+                    <img src="assets/img/runway/0723-wall.jpg" alt="Modelo dando la espalda caminando hacia las luces de la pasarela">
+                </div>
+                <div class="gallery-photo-item" data-category="runway" data-description="- <strong>Fashion Week México</strong> - Fotografía de Pasarela: <strong>Braulio Fuentes</strong>">
+                    <img src="assets/img/runway/1228-wall.jpg" alt="Modelo de espalda parada en punta de pasarela con luces de frente y los fotografos al fondo">
+                </div>
+                <div class="gallery-photo-item" data-category="runway" data-description="Foto: <strong>Braulio Fuentes</strong>">
+                    <img src="assets/img/runway/4836.jpg" alt="Modelo en pasarela con vestido negro y mirada seria">
+                </div>
+                <div class="gallery-photo-item" data-category="runway" data-description="- <strong>Fashion Week México</strong> - Fotografía de Pasarela: <strong>Braulio Fuentes</strong>">
+                    <img src="assets/img/runway/5309.jpg" alt="Modelo hombre con cabello blanco y saco ginda lleva lentes y está caminando en la pasarela">
+                </div>
+                <div class="gallery-photo-item" data-category="runway" data-description="- <strong>Fashion Week México</strong> - Fotografía de Pasarela: <strong>Braulio Fuentes</strong>">
+                    <img src="assets/img/runway/5419.jpg" alt="Modelo hombre en pasarela con saco negro, chaleco gris, camisa blanca y corbata roja">
+                </div>
+                <div class="gallery-photo-item" data-category="runway" data-description="Foto: <strong>Braulio Fuentes</strong>">
+                    <img src="assets/img/runway/9157-wall.jpg" alt="Modelo en pasarela con vestido en diagonal negro y alto peinado">
+                </div>
+                <div class="gallery-photo-item" data-category="runway" data-description="Foto: <strong>Braulio Fuentes</strong>">
+                    <img src="assets/img/runway/9169-wall.jpg" alt="Modelo con vestido negro caminando en pasarela y luzes de fondo">
+                </div>
+                <div class="gallery-photo-item" data-category="runway" data-description="Foto: <strong>Braulio Fuentes</strong>">
+                    <img src="assets/img/runway/9173.jpg" alt="Modelo en pasarela con vestido negro con cortes diagonales y peinado estructurado alto">
+                </div>
+                <div class="gallery-photo-item" data-category="runway" data-description="- <strong>Fashion Week México</strong> - Fotografía de Pasarela: <strong>Braulio Fuentes</strong>">
+                    <img src="assets/img/runway/fashion-week-1.jpg" alt="Modelos caminando en fila india en el cierre de la pasarela">
+                </div>
+                <div class="gallery-photo-item" data-category="runway" data-description="- Modelo: <strong>Lizbeth V.</strong> - Fotografía: <strong>Braulio Fuentes</strong>">
+                    <img src="assets/img/runway/liz1.jpg" alt="Modelos con vestido blanco y cabello también blanco en medio de la oscuridad">
+                </div>
+                <div class="gallery-photo-item" data-category="runway" data-description="- <strong>Fashion Week México</strong> - Diseño: <strong>Vero Diaz</strong> - Fotografía de Pasarela: <strong>Braulio Fuentes</strong>">
+                    <img src="assets/img/runway/verodiaz001.jpg" alt="Encuadre del vestido blanco con encajes y transparencias sobre pasarela">
+                </div>
+                <div class="gallery-photo-item" data-category="runway" data-description="- <strong>Fashion Week México</strong> - Diseñador:<strong>David Salomón</strong> - Fotografía de Pasarela: <strong>Braulio Fuentes</strong>">
+                    <img src="assets/img/runway/wimg_0198.jpg" alt="Modelos en pasarela caminando en fila india con vestidos coloridos de primavera">
+                </div>
+                <div class="gallery-photo-item" data-category="runway" data-description="- <strong>Fashion Week México</strong> - Fotografía de Pasarela: <strong>Braulio Fuentes</strong>">
+                    <img src="assets/img/runway/wimg_0677.jpg" alt="Modelo con vestido rojo caminando en medio de la pasarela">
+                </div>
+                <div class="gallery-photo-item" data-category="runway" data-description="- <strong>Fashion Week México</strong> - Fotografía de Pasarela: <strong>Braulio Fuentes</strong>">
+                    <img src="assets/img/runway/wimg_0826.jpg" alt="Modelo caminando de la mano del diseñador al cierre de su pasarela">
+                </div>
+                <div class="gallery-photo-item" data-category="runway" data-description="- <strong>Fashion Week México</strong> - Fotografía de Pasarela: <strong>Braulio Fuentes</strong>">
+                    <img src="assets/img/runway/wimg_1602.jpg" alt="Modelo en pasarela con una blusa de hilos color verde botella y falda corte princesa negro">
+                </div>
+                <div class="gallery-photo-item" data-category="runway" data-description="- <strong>Fashion Week México</strong> - Fotografía de Pasarela: <strong>Braulio Fuentes</strong>">
+                    <img src="assets/img/runway/wimg_2167.jpg" alt="Modelo en pasarela con transparencia en el top y vestido largo amarillo">
+                </div>
+                <div class="gallery-photo-item" data-category="runway" data-description="- <strong>Fashion Week México</strong> - Fotografía de Pasarela: <strong>Braulio Fuentes</strong>">
+                    <img src="assets/img/runway/01IMG_5390.jpg" alt="Modelo en pasarela con transparencia en el top y vestido largo amarillo">
+                </div>
+                <div class="gallery-photo-item" data-category="runway" data-description="- <strong>Fashion Week México</strong> - Fotografía de Pasarela: <strong>Braulio Fuentes</strong>">
+                    <img src="assets/img/runway/01IMG_5583.jpg" alt="Modelo en pasarela con transparencia en el top y vestido largo amarillo">
+                </div>
+                <div class="gallery-photo-item" data-category="runway" data-description="- <strong>Fashion Week México</strong> - Fotografía de Pasarela: <strong>Braulio Fuentes</strong>">
+                    <img src="assets/img/runway/aIMAGENdestacada.jpg" alt="Modelo en pasarela con transparencia en el top y vestido largo amarillo">
+                </div>
+                <div class="gallery-photo-item" data-category="runway" data-description="- <strong>Fashion Week México</strong> - Fotografía de Pasarela: <strong>Braulio Fuentes</strong>">
+                    <img src="assets/img/runway/IMG_3498.JPG" alt="Modelo en pasarela con transparencia en el top y vestido largo amarillo">
+                </div>
+
+<!-- ===== FOTOS DE OTHERS ===== -->
+                <div class="gallery-photo-item" data-category="others" data-description="- Modelo: <strong>Tania V.</strong> - Fotógrafo: <strong>Braulio</strong> - Lugar: <strong>CDMX</strong>">
+                    <img src="assets/img/others/taniav.jpg" alt="Tania haciendo una mueca con una gora de baseball con estoperoles plateados u lentes oscuros">
+                </div>
+                <div class="gallery-photo-item" data-category="others" data-description="- Modelo: <strong>Espeli</strong> - Fotógrafo: <strong>Braulio</strong> - Lugar: <strong>CDMX</strong>">
+                    <img src="assets/img/others/espeli.jpg" alt="Espeli viendo a un lado en el parque México de Condesa">
+                </div>
+                <div class="gallery-photo-item" data-category="others" data-description="- Modelo: <strong>Frida</strong> - Fotógrafo: <strong>Braulio</strong> - Moda: <strong>Edgar Uriel</strong> - Lugar: <strong>Acapulco - Villa Vera</strong>">
+                    <img src="assets/img/others/frida2.jpg" alt="Frida vistiendo un traje de baño negro acostada sobre una amaca azul junto a la alberca debajo de la sombrilla a medio día">
+                </div>
+                <div class="gallery-photo-item" data-category="others" data-description="- Grupo: <strong>Beautiful Pain</strong> - Fotógrafo: <strong>Braulio</strong>">
+                    <img src="assets/img/others/grup-beautiful.jpg" alt="Los tres integrantes del grupo vestidos de negro viendo a cámara">
+                </div>
+                <div class="gallery-photo-item" data-category="others" data-description="- Moda: <strong>Edgar Uriel</strong> - Fotógrafo: <strong>Braulio</strong> - Lugar: <strong>Acapulco</strong>">
+                    <img src="assets/img/others/acapulco1.jpg" alt="Chico caminando a la orilla de la playa de Acapulco al atardecer dorado">
+                </div>
+                <div class="gallery-photo-item" data-category="others" data-description="Coordinación de moda: <strong>Ana Lucia</strong> - Fotógrafo: <strong>Braulio Fuentes</strong> - Lugar: <strong>CDMX</strong>">
+                    <img src="assets/img/others/calaveras1.jpg" alt="Chica pintada de catrina con ropa negra en posición de plegaria en fondo negro">
+                </div>
+                <div class="gallery-photo-item" data-category="others" data-description="Coordinación de moda: <strong>Ana Lucia</strong> - Fotógrafo: <strong>Braulio Fuentes</strong> - Lugar: <strong>CDMX</strong">
+                    <img src="assets/img/others/calaveras2.jpg" alt="Chica pintada de catrina con vestido de gasa, fondo de calaveras doradas">
+                </div>
+                <div class="gallery-photo-item" data-category="others" data-description="Modelo: <strong>Julieta</strong> - Fotógrafo: <strong>Braulio Fuentes</strong> - Lugar: <strong>Puebla</strong>">
+                    <img src="assets/img/others/julieta1.jpg" alt="Mujer parada en la plaza con la iglesia de fondo en Puebla">
+                </div>
+                <div class="gallery-photo-item" data-category="others" data-description="Modelo: <strong>Julieta</strong> - Fotógrafo: <strong>Braulio Fuentes</strong> - Lugar: <strong>Puebla</strong>">
+                    <img src="assets/img/others/julieta2.jpg" alt="Mujer parada en la plaza de fondo el cielo azul en Puebla">
+                </div>
+                <div class="gallery-photo-item" data-category="others" data-description="Foto: <strong>Braulio Fuentes</strong> - Lugar: <strong>CDMX</strong>">
+                    <img src="assets/img/others/mujer3.jpg" alt="Modelos con expresión sensual a blanco y negro con vestido negro y cabello suelto">
+                </div>
+                <div class="gallery-photo-item" data-category="others" data-description="Foto: <strong>Braulio Fuentes</strong> - Lugar: <strong>CDMX</strong>">
+                    <img src="assets/img/others/nina1.jpeg" alt="Actriz en expresión de sufrimiento en blanco y negro">
+                </div>
+                <div class="gallery-photo-item" data-category="others" data-description="Foto: <strong>Braulio Fuentes</strong> - Lugar: <strong>CDMX</strong>">
+                    <img src="assets/img/others/nina2.jpeg" alt="Modelo saltando con fondo blanco">
+                </div>
+                <div class="gallery-photo-item" data-category="others" data-description="Modelo: <strong>Karla</strong> - Fotógrafo: <strong>Braulio Fuentes</strong> - Lugar: <strong>CDMX</strong>">
+                    <img src="assets/img/others/nina3.jpg" alt="Modelo con expresión dominante de cabello largo y lacio con vestido blanco y fondo blanco">
+                </div>
+                <div class="gallery-photo-item" data-category="others" data-description="Modelo: <strong>Pablo</strong> - Fotógrafo: <strong>Braulio Fuentes</strong> - Lugar: <strong>CDMX</strong>">
+                    <img src="assets/img/others/pablo2022.jpg" alt="Pablo con ropa formal y expresión seria en fondo rojo y un poco de penumbra">
+                </div>
+                <div class="gallery-photo-item" data-category="others" data-description="Foto: <strong>Braulio Fuentes</strong> - Lugar: <strong>CDMX</strong>">
+                    <img src="assets/img/others/seramen1.jpg" alt="Chica viendo sobre su hombro">
+                </div>
+                <div class="gallery-photo-item" data-category="others" data-description="Foto: <strong>Braulio Fuentes</strong> - Lugar: <strong>CDMX</strong>">
+                    <img src="assets/img/others/sertamen2.jpg" alt="Chica tumbada sobre un tapete ">
+                </div>
+                <div class="gallery-photo-item" data-category="others" data-description="Modelo: <strong>Tania V.</strong> - Fotógrafo: <strong>Braulio Fuentes</strong> - Lugar: <strong>CDMX</strong>">
+                    <img src="assets/img/others/taniav1.jpg" alt="Tania con lentes oscuros y una chaqueta de piel en la azutea de un estacionamiento de la CDMX">
+                </div>
+                <div class="gallery-photo-item" data-category="others" data-description="Modelo: <strong>Gabriela R.</strong> - Fotógrafo: <strong>Braulio Fuentes</strong> - Lugar: <strong>CDMX</strong>">
+                    <img src="assets/img/others/Gabriela-02.jpg" alt="Mujer de cabello blanco, delgada con vestido negro apoyada en pared blanca de Bellas Artes en CDMX">
+                </div>
+                <div class="gallery-photo-item" data-category="others" data-description="Modelo: <strong>Melisa M.</strong> - Fotógrafo: <strong>Braulio Fuentes</strong> - Lugar: <strong>CDMX</strong>">
+                    <img src="assets/img/others/MMC-mel.jpg" alt="Chica con judia gris y maquillaje dramatico con expresión intensa con fondo negro">
+                </div>
+                <div class="gallery-photo-item" data-category="others" data-description="Fotógrafo: <strong>Braulio Fuentes</strong> - Lugar: <strong>CDMX</strong>">
+                    <img src="assets/img/others/img_0410.jpg" alt="Hombre con mirada penetrante con camisa a rallas verticales finas con fondo negro">
+                </div>
+                
+            </div>
+            <!-- ===== FIN: GALERÍA UNIFICADA ===== -->
+
         </section>
     </main>
 
-    
     <footer id="footer-placeholder"></footer>
 
     <script src="script.js"></script>
+    
 </body>
 </html>
