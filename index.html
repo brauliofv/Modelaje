@@ -7,24 +7,28 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
-<body class="home-photography-style">
-    <!-- ===== INICIO DE LA PANTALLA DE CARGA (SPLASH SCREEN) ===== -->
+<body class="home-photography-style" id="page-home">
+
+   <header id="header-placeholder"></header>
+
+
+    <main id="swup" class="transition-fade">
+
+<!-- ===== INICIO DE LA PANTALLA DE CARGA (SPLASH SCREEN) ===== -->
     <div id="splash-screen">
         <div class="splash-content">
             <div class="line top-line"></div>
-            <img class="brand-name" src="assets/img/logo-simple-shield-COLOR.svg" style="width: 40%;
+            <img class="brand-name" src="assets/img/logo-simple-shield-COLOR.svg" 
+            style="width: 40%;
             padding-top: 2rem;" alt="escudo braulio">
             <div class="brand-name">BRAULIO</div>
             <div class="line bottom-line"></div>
         </div>
     </div>
-    
-
-   <header id="header-placeholder"></header>
 
 
  <!--sección del hero con el diseño -->
-    <section class="hero-photography-style">
+    <section class="hero-photography-style section-full-width">
         <div class="hero-photography-text-container">
             <div class="hero-title">
                 <h1 style="color:#C8A24A">THE FASHION, ONE SHOT AT A TIME.</h1>
@@ -37,19 +41,16 @@
             <img src="assets/img/port-index.png" alt="Fashion Photography by Braulio">
         </div>
     </section>
-    
-    <!-- Aquí debajo puedes agregar más secciones  -->
-
-    <main>
-
         
 <!-- ===== INICIO DE LA SECCIÓN DE FILOSOFÍA ===== -->
 <section class="philosophy-section">
     <div class="philosophy-content">
         <p>I focus on making landscapes and scenes that are usually hard to reproduce, thus capturing those ethereal moments. The technological tools are the brushes that I use to illuminate the important elements.</p>
         <div class="philosophy-social-links">
-            <a href="https://www.instagram.com/braulio.fv" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
-            <a href="https://www.linkedin.com/in/brauliofv/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+            <a href="https://www.instagram.com/braulio.fv" target="_blank">
+                <i class="fab fa-instagram"></i> Instagram</a>
+            <a href="https://www.linkedin.com/in/brauliofv/" target="_blank">
+                <i class="fab fa-linkedin"></i> LinkedIn</a>
         </div>
     </div>
 </section>
@@ -103,8 +104,10 @@
     <div class="philosophy-content">
         <p>I am taking on new projects. If you have any fashion photography projects or want to say hi, please get in touch.</p>
         <div class="philosophy-social-links">
-            <a href="https://www.instagram.com/braulio.fv" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
-            <a href="https://www.linkedin.com/in/brauliofv/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+            <a href="https://www.instagram.com/braulio.fv" target="_blank">
+                <i class="fab fa-instagram"></i> Instagram</a>
+            <a href="https://www.linkedin.com/in/brauliofv/" target="_blank">
+                <i class="fab fa-linkedin"></i> LinkedIn</a>
         </div>
     </div>
 </section>
@@ -169,8 +172,10 @@
     <div class="philosophy-content">
         <p>I consider training an important factor as an instructor, and therefore, even though I have experience in areas of interest, I have to learn more to complement and thus offer quality courses and workshops.</p>
         <div class="philosophy-social-links">
-            <a href="https://www.instagram.com/braulio.fv" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
-            <a href="https://www.linkedin.com/in/brauliofv/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+            <a href="https://www.instagram.com/braulio.fv" target="_blank">
+                <i class="fab fa-instagram"></i> Instagram</a>
+            <a href="https://www.linkedin.com/in/brauliofv/" target="_blank">
+                <i class="fab fa-linkedin"></i> LinkedIn</a>
         </div>
     </div>
 </section>
@@ -195,7 +200,10 @@
 
  <footer id="footer-placeholder"></footer>
 
-    <script src="script.js"></script>
+    <!-- ===== INICIO: LIBRERÍA SWUP PARA TRANSICIONES DE PÁGINA ===== -->
+<script src="https://unpkg.com/swup@4"></script>
+<!-- ===== FIN: LIBRERÍA SWUP ===== -->
+<script src="script.js"></script>
     
 </body>
 </html>

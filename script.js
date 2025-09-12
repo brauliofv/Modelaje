@@ -5,14 +5,13 @@
 // 1. Ya no tenemos un blogData estático. Se construirá dinámicamente.
 let blogData = [];
 
-// --- INICIALIZACIÓN PRINCIPAL ---
-document.addEventListener('DOMContentLoaded', function() {
-    // 2. La inicialización ahora comienza con la construcción de los datos del blog.
-    buildBlogData().then(() => {
-        // 3. Una vez construido, ejecutamos el resto de la lógica.
-        loadComponents();
-    });
-});
+// ===== INICIO: INICIALIZACIÓN DE SWUP =====
+// 1. Crea una nueva instancia de Swup.
+//    Esto activa la librería para que intercepte los clics en los enlaces.
+const swup = new Swup();
+// ===== FIN: INICIALIZACIÓN DE SWUP =====
+
+
 
 // --- FUNCIÓN PARA CONSTRUIR blogData DINÁMICAMENTE ---
 async function buildBlogData() {
@@ -60,44 +59,95 @@ async function buildBlogData() {
 
 // --- FUNCIÓN PARA CARGAR COMPONENTES ---
 // Busca la función loadComponents en tu script.js
+// --- FUNCIÓN PARA CARGAR COMPONENTES (ADAPTADA PARA SWUP) ---
 async function loadComponents() {
-    const splashScreen = document.getElementById('splash-screen'); // <-- Obtenemos la pantalla de carga
-
+    // Esta función ahora solo carga header y footer la primera vez.
     const headerPlaceholder = document.getElementById('header-placeholder');
     const footerPlaceholder = document.getElementById('footer-placeholder');
 
+    // No necesitamos la pantalla de carga aquí, Swup la manejará.
+
     try {
-        const [headerRes, footerRes] = await Promise.all([
-            fetch('header.html'),
-            fetch('footer.html')
-        ]);
-
-        if (headerRes.ok && headerPlaceholder) {
-            headerPlaceholder.innerHTML = await headerRes.text();
-            initializeHeaderScripts();
+        // Cargar header y footer si no están ya cargados (en la carga inicial)
+         if (headerPlaceholder && !headerPlaceholder.innerHTML) {
+     const headerRes = await fetch('header.html');
+     if (headerRes.ok) {
+         headerPlaceholder.innerHTML = await headerRes.text();
+         // ===== CAMBIO CLAVE 1: Inicializamos el header AQUÍ y solo aquí =====
+         initializeHeaderScripts(); 
+     }
+ }
+        if (footerPlaceholder && !footerPlaceholder.innerHTML) {
+            const footerRes = await fetch('footer.html');
+            if (footerRes.ok) {
+                footerPlaceholder.innerHTML = await footerRes.text();
+            }
         }
-
-        if (footerRes.ok && footerPlaceholder) {
-            footerPlaceholder.innerHTML = await footerRes.text();
-        }
-
-        initializePageSpecificScripts();
-
     } catch (error) {
-        console.error('Error al cargar los componentes:', error);
-    } finally {
-        // ===== LÓGICA PARA OCULTAR LA ANIMACIÓN =====
-        // Se ejecuta siempre, incluso si hay un error,
-        // para que el usuario no se quede atascado.
-        if (splashScreen) {
-            // Esperamos un poco más para que la animación se aprecie
-            setTimeout(() => {
-                splashScreen.classList.add('hidden');
-            }, 1000); // 500ms = 0.5 segundos de espera extra
-        }
-        // ===========================================
+        console.error('Error al cargar componentes estáticos:', error);
     }
+
+    // Inicializamos los scripts de la página actual.
+    // Esta función se llamará cada vez que Swup cambie de página.
+    runPageScripts();
 }
+
+// --- FUNCIÓN PARA EJECUTAR SCRIPTS ESPECÍFICOS DE LA PÁGINA ---
+// Separamos la inicialización de scripts para poder llamarla con Swup.
+function runPageScripts() {
+    console.log("Running scripts for this page..."); // Para depuración
+    
+    initializePageSpecificScripts();
+}
+
+
+// --- INICIALIZACIÓN PRINCIPAL (ADAPTADA PARA SWUP) ---
+document.addEventListener('DOMContentLoaded', function() {
+    // Esta lógica se ejecuta solo en la primera carga de la página.
+    handleInitialPageLoad();
+});
+
+// ===== INICIO: INTEGRACIÓN CON EVENTOS DE SWUP =====
+// Swup disparará este evento CADA VEZ que cargue una página nueva.
+// ===== INICIO: INTEGRACIÓN CON EVENTOS DE SWUP =====
+// Swup disparará este evento CADA VEZ que cargue una página nueva.
+swup.hooks.on('page:view', () => {
+
+    // ===== INICIO: LÓGICA DE LIMPIEZA DEL SPLASH SCREEN =====
+    // 1. Buscamos si la página que acabamos de cargar tiene un splash screen.
+    const splashScreen = document.getElementById('splash-screen');
+    
+    // 2. Si existe (lo que ocurrirá al volver a index.html)...
+    if (splashScreen) {
+        // 3. ...le añadimos la clase 'hidden' INMEDIATAMENTE.
+        // Esto evita que se vea, ya que estará oculto antes de que la animación de entrada de Swup termine.
+        splashScreen.classList.add('hidden');
+    }
+    // ===== FIN: LÓGICA DE LIMPIEZA =====
+
+    // Volvemos a ejecutar los scripts necesarios para la nueva página.
+    runPageScripts();
+});
+// ===== FIN: INTEGRACIÓN CON EVENTOS DE SWUP =====
+
+// --- NUEVA FUNCIÓN PARA LA CARGA INICIAL ---
+function handleInitialPageLoad() {
+    const splashScreen = document.getElementById('splash-screen');
+    
+    // Comprobamos si estamos en la página de inicio Y si el splash screen existe
+    if (document.body.id === 'page-home' && splashScreen) {
+        // Esperamos un poco para que se vea la animación y luego lo ocultamos
+        setTimeout(() => {
+            splashScreen.classList.add('hidden');
+        }, 1000); // Puedes ajustar este tiempo
+    }
+    
+    // Después de manejar el splash, cargamos el resto.
+    buildBlogData().then(() => {
+        loadComponents(); // Esto llama a runPageScripts
+    });
+}
+// ===== FIN: INTEGRACIÓN CON EVENTOS DE SWUP =====
 
 // --- FUNCIONES DE INICIALIZACIÓN ---
 function initializeHeaderScripts() {

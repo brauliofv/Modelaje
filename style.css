@@ -11,7 +11,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: opacity 0.8s ease, visibility 0s 0.8s;
+    transition: opacity 0.8s ease, visibility 0s 1.3s;
 }
 
 /* Clase para ocultar la pantalla de carga */
@@ -300,6 +300,21 @@ body.light-mode .theme-toggle-btn .fa-moon { display: none; }
     display: block;
 }
 
+/* ===== INICIO: UTILIDAD PARA SECCIONES DE ANCHO COMPLETO ===== */
+
+/* Esta clase anula el padding lateral del <main> para una sección específica. */
+.section-full-width {
+    /* 1. Usamos márgenes negativos para "sacar" la sección del contenedor.
+       El valor '5%' debe coincidir con el padding del <main>. */
+    margin-left: -5.5%;
+    margin-right: -5.5%;
+
+    /* 2. (Opcional pero recomendado) Si el ancho de tu sitio es fijo,
+       esto asegura que funcione correctamente. En tu caso, no es estrictamente necesario. */
+    width: auto;
+}
+
+/* ===== FIN: UTILIDAD PARA SECCIONES DE ANCHO COMPLETO ===== */
 
 /* Sección de Posts */
 .posts-section {
@@ -1857,3 +1872,33 @@ body.dark-mode .posts-section .post-card:hover {
     width: 100%;
 }
 
+/* ===== INICIO: ESTILOS PARA LAS TRANSICIONES DE SWUP ===== */
+
+/* 1. Definimos la animación base para la transición.
+   La clase 'transition-fade' la pusimos en la etiqueta <main>. */
+.transition-fade {
+    transition: opacity 0.4s; /* Duración y tipo de transición */
+    opacity: 1;
+}
+
+/* 2. Estado de "salida": Cuando Swup está sacando la página vieja.
+   El HTML recibe temporalmente la clase 'is-leaving'. */
+html.is-leaving .transition-fade {
+    opacity: 0;
+}
+
+/* 3. Estado de "entrada": Cuando Swup está metiendo la página nueva.
+   El HTML recibe temporalmente la clase 'is-animating' y el contenido está invisible. */
+html.is-animating .transition-fade {
+    opacity: 0;
+}
+
+/* 4. Estado final: Una vez la animación termina, la opacidad vuelve a 1.
+   El propio Swup y la regla base se encargan de esto. */
+
+/* ===== FIN: ESTILOS PARA LAS TRANSICIONES DE SWUP ===== */
+
+/* ===== INICIO: AJUSTE DE SPLASH SCREEN PARA SWUP ===== */
+
+
+/* ===== FIN: AJUSTE DE SPLASH SCREEN PARA SWUP ===== */
