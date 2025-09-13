@@ -2,59 +2,43 @@
 
 // ===== INICIO DEL ARCHIVO script.js (TOTALMENTE DINÁMICO) =====
 
-// 1. Ya no tenemos un blogData estático. Se construirá dinámicamente.
-let blogData = [];
 
 // ===== INICIO: INICIALIZACIÓN DE SWUP =====
 // 1. Crea una nueva instancia de Swup.
 //    Esto activa la librería para que intercepte los clics en los enlaces.
+// ===== INICIO: INICIALIZACIÓN PRINCIPAL SIMPLIFICADA =====
+
+// 1. La instancia de Swup se mantiene
 const swup = new Swup();
-// ===== FIN: INICIALIZACIÓN DE SWUP =====
 
+// 2. blogData se llenará desde el nuevo JSON
+let blogData = [];
 
-
-// --- FUNCIÓN PARA CONSTRUIR blogData DINÁMICAMENTE ---
-async function buildBlogData() {
-    try {
-        const indexResponse = await fetch('posts-index.json');
-        const postSlugs = await indexResponse.json();
-
-        const postPromises = postSlugs.map(async (slug) => {
-            const postPath = `assets/posts/${slug}/content.html`;
-            const contentResponse = await fetch(postPath);
-            if (!contentResponse.ok) return null;
-            const htmlContent = await contentResponse.text();
-
-            // Usamos un truco para leer el HTML y extraer los metadatos
-            const tempDiv = document.createElement('div');
-            tempDiv.innerHTML = htmlContent;
-
-            const title = tempDiv.querySelector('meta[name="title"]')?.getAttribute('content') || slug.replace(/_/g, ' ');
-            const topic = tempDiv.querySelector('meta[name="topic"]')?.getAttribute('content') || 'General';
-            const tags = tempDiv.querySelector('meta[name="tags"]')?.getAttribute('content') || '';
-            const coverImageFile = tempDiv.querySelector('meta[name="cover"]')?.getAttribute('content') || '';
-            
-            return {
-                "Título": title,
-                "slug": slug,
-                "Topic": topic,
-                "Tags": tags,
-                "coverImage": coverImageFile ? `assets/posts/${slug}/${coverImageFile}` : ''
-            };
-        });
-
-        const posts = await Promise.all(postPromises);
-        // Filtramos cualquier post que no se haya podido cargar y lo asignamos a la variable global.
-        blogData = posts.filter(post => post !== null);
-        
-        // Opcional: Ordenar posts por algún criterio, por ahora se ordenan como en el JSON.
-        // Si tuvieras una fecha en los metadatos, podríamos ordenar por fecha aquí.
-
-    } catch (error) {
-        console.error("Error al construir los datos del blog:", error);
-    }
+// 3. Función de carga inicial
+function handleInitialPageLoad() {
+    fetch('/posts-index.json')
+        .then(res => res.json())
+        .then(data => {
+            blogData = data; // Guardamos los datos de los posts
+            loadComponents(); // Cargamos header/footer y ejecutamos scripts de la página
+        })
+        .catch(error => console.error("Error al cargar /posts-index.json:", error));
 }
 
+// 4. Eventos de Swup y carga inicial
+document.addEventListener('DOMContentLoaded', handleInitialPageLoad);
+
+swup.hooks.on('page:view', () => {
+    const splashScreen = document.getElementById('splash-screen');
+    if (splashScreen) {
+        splashScreen.classList.add('hidden');
+    }
+    // Ejecutamos los scripts para la nueva página cargada por Swup
+    runPageScripts();
+});
+
+// ===== FIN: INICIALIZACIÓN PRINCIPAL SIMPLIFICADA =====
+// ===== FIN: INICIALIZACIÓN DE SWUP =====
 
 
 // --- FUNCIÓN PARA CARGAR COMPONENTES ---
@@ -70,7 +54,7 @@ async function loadComponents() {
     try {
         // Cargar header y footer si no están ya cargados (en la carga inicial)
          if (headerPlaceholder && !headerPlaceholder.innerHTML) {
-     const headerRes = await fetch('header.html');
+     const headerRes = await fetch('/header.html');
      if (headerRes.ok) {
          headerPlaceholder.innerHTML = await headerRes.text();
          // ===== CAMBIO CLAVE 1: Inicializamos el header AQUÍ y solo aquí =====
@@ -78,7 +62,7 @@ async function loadComponents() {
      }
  }
         if (footerPlaceholder && !footerPlaceholder.innerHTML) {
-            const footerRes = await fetch('footer.html');
+            const footerRes = await fetch('/footer.html');
             if (footerRes.ok) {
                 footerPlaceholder.innerHTML = await footerRes.text();
             }
@@ -143,9 +127,12 @@ function handleInitialPageLoad() {
     }
     
     // Después de manejar el splash, cargamos el resto.
-    buildBlogData().then(() => {
-        loadComponents(); // Esto llama a runPageScripts
-    });
+    fetch('/posts-index.json')
+        .then(res => res.json())
+        .then(data => {
+            blogData = data;
+            loadComponents();
+        });
 }
 // ===== FIN: INTEGRACIÓN CON EVENTOS DE SWUP =====
 
@@ -272,40 +259,6 @@ function processWorksGallery() {
     });
 }
 
-function loadSinglePost() {
-    const postContentContainer = document.getElementById('post-content');
-    const params = new URLSearchParams(window.location.search);
-    const postTitle = params.get('title');
-    const post = blogData.find(p => p.Título === postTitle);
-
-    if (post) {
-        document.title = `${post.Título} - Braulio`;
-        const postPath = `assets/posts/${post.slug}/content.html`;
-        
-        fetch(postPath)
-            .then(response => response.ok ? response.text() : Promise.reject('Archivo no encontrado'))
-            .then(htmlContent => {
-                let processedContent = htmlContent;
-                const youtubeRegex = /(<p>)?\s*<a href="https?:\/\/(?:www\.)?youtube\.com\/watch\?v=([a-zA-Z0-9_-]+)[^"]*">.*?<\/a>\s*(<\/p>)?/g;
-                processedContent = processedContent.replace(youtubeRegex, (match, pStart, videoId, pEnd) => `<div class="video-container"><iframe src="https://www.youtube.com/embed/${videoId}" frameborder="0" allowfullscreen></iframe></div>`);
-                
-                postContentContainer.innerHTML = `
-                <h1>${post.Título}</h1>
-                <div class="post-meta">
-                    <p><strong>Tópico:</strong> ${post.Topic || 'N/A'}</p>
-                    ${post.Tags ? `<p class="tags"><strong>Etiquetas:</strong> ${post.Tags}</p>` : ''}
-                </div>
-                <div class="post-body">${processedContent}</div>
-            `;
-            })
-            .catch(error => {
-                postContentContainer.innerHTML = '<h1>Error al cargar</h1><p>No se pudo encontrar el contenido.</p>';
-            });
-    } else {
-        postContentContainer.innerHTML = '<h1>Post no encontrado</h1>';
-    }
-}
-
 // === función displayPosts
 // === BLOG.HTML: Estructura corregida para mostrar texto visible
 // Busca y reemplaza la función displayPosts completa
@@ -323,11 +276,11 @@ function displayPosts(posts, container) {
 
         // Usamos la misma estructura para todas las tarjetas de post
         postCard.innerHTML = `
-            <a href="post.html?title=${encodeURIComponent(post.Título)}">
+            <a href="assets/posts/${post.slug}/">
                 <img src="${imageUrl}" alt="${post.Título}">
             </a>
             <div class="post-card-content">
-                <h3><a href="post.html?title=${encodeURIComponent(post.Título)}">${post.Título}</a></h3>
+                <h3><a href="assets/posts/${post.slug}/">${post.Título}</a></h3>
                 <p><strong>Tópico:</strong> ${post.Topic || 'N/A'}</p>
                 <p class="tags">${post.Tags || ''}</p>
             </div>`;
@@ -629,7 +582,7 @@ function initializeContactForm() {
 
         try {
             // 3. Enviamos los datos a nuestro servidor con 'fetch'
-            const response = await fetch('http://localhost:3000/submit-form', {
+            const response = await fetch('/api/submit-form', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

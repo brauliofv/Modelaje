@@ -1,11 +1,65 @@
 [
-  "Como trabaja una agencia de modelos",
-  "Modelos IA Reales",
-  "Encontrar fotógrafo",
-  "Cualidades de las modelos",
-  "Modelos infantiles",
-  "casting para modelos",
-  "certamen de belleza",
-  "Tipos de modelos profesionales en la industria de la moda",
-  "Estafadores-de-modelos-en-la-industria-de-la-moda"
+  {
+    "Título": "✅ Como trabaja una AGENCIA DE MODELOS y️ TALENTOS ✅",
+    "slug": "Como trabaja una agencia de modelos",
+    "Topic": "Profesional",
+    "Tags": "#AgenciaDeModelos, #CarreraDeModelo, #Representación, #Talento, #ContratosModelos",
+    "coverImage": "assets/posts/Como trabaja una agencia de modelos/cover.jpg"
+  },
+  {
+    "Título": "Modelos IA vs Modelos Reales: Futuro, Desafíos y Cómo Triunfar en el Modelaje",
+    "slug": "Modelos IA Reales",
+    "Topic": "Específico",
+    "Tags": "#CarreraDeModelo, #FormacionModelos, #Fotografía, #Pasarela, #Talento, #ModelosIA",
+    "coverImage": "assets/posts/Modelos IA Reales/cover.png"
+  },
+  {
+    "Título": "✅ ¿Como encontrar un fotógrafo por intercambio? ✅",
+    "slug": "Encontrar fotógrafo",
+    "Topic": "Riesgos y Seguridad",
+    "Tags": "#CarreraDeModelo, #FormacionModelos, #Fotografía, #Talento",
+    "coverImage": "assets/posts/Encontrar fotógrafo/cover.jpg"
+  },
+  {
+    "Título": "✅ Cualidades de las modelos » Pasarela, fotografía, vídeo. ⭐️",
+    "slug": "Cualidades de las modelos",
+    "Topic": "Oportunidades y Formación",
+    "Tags": "#CarreraDeModelo, #Pasarela, #Video, #HabilidadesModelaje",
+    "coverImage": "assets/posts/Cualidades de las modelos/cover.jpg"
+  },
+  {
+    "Título": "✅ Modelos Infantiles » Pasarela o Fotografía ✅",
+    "slug": "Modelos infantiles",
+    "Topic": "Específico",
+    "Tags": "#DesarrolloProfesional, #CarreraDeModelo, #FormacionModelos, #TiposDeModelos",
+    "coverImage": "assets/posts/Modelos infantiles/cover.jpeg"
+  },
+  {
+    "Título": "⭐️ CASTING para modelos y talentos ⭐️",
+    "slug": "casting para modelos",
+    "Topic": "Oportunidades y Formación",
+    "Tags": "#CamGirl, #Casting, #Pasarela, #Fotografía, #LegalEnModa, #ContratosModelos",
+    "coverImage": "assets/posts/casting para modelos/cover.png"
+  },
+  {
+    "Título": "✨ CERTAMEN DE BELLEZA ✨ Una herramienta para la modelo",
+    "slug": "certamen de belleza",
+    "Topic": "Oportunidades y Formación",
+    "Tags": "#CamGirl, #FormacionModelos, #CarreraDeModelo, #HabilidadesModelaje",
+    "coverImage": "assets/posts/certamen de belleza/cover.jpg"
+  },
+  {
+    "Título": "⭐️ Tipos de modelos profesionales ✅ en la industria de la moda ⭐️",
+    "slug": "Tipos de modelos profesionales en la industria de la moda",
+    "Topic": "Profesional",
+    "Tags": "#CarreraDeModelo, #FormacionModelos, #LegalEnModa, #Pasarela, #Fotografía",
+    "coverImage": "assets/posts/Tipos de modelos profesionales en la industria de la moda/cover.jpg"
+  },
+  {
+    "Título": "⚠️⛔ Estafadores de modelos en la industria de la moda ⚠️⛔",
+    "slug": "Estafadores-de-modelos-en-la-industria-de-la-moda",
+    "Topic": "Riesgos y Seguridad",
+    "Tags": "#CamGirl, #CarreraDeModelo, #AcuerdosLegales, #ContenidoOnline, #FormacionModelos, #IndustriaAdultos, #ModeloWebcam",
+    "coverImage": "assets/posts/Estafadores-de-modelos-en-la-industria-de-la-moda/cover.jpg"
+  }
 ]
