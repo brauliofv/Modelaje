@@ -1235,6 +1235,7 @@ body.dark-mode .posts-section .post-card:hover {
 .single-post-page #post-content {
     max-width: 800px; /* Limitamos el ancho para mejorar la legibilidad */
     margin: 0 auto; /* Centramos el contenido */
+    margin-top: 6rem;
 }
 
 /* 3. Estilos para el título del post y metadatos */
@@ -1902,3 +1903,15 @@ html.is-animating .transition-fade {
 
 
 /* ===== FIN: AJUSTE DE SPLASH SCREEN PARA SWUP ===== */
+
+
+.page-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 4rem 5%; 
+    text-align: center;
+}
+.text-terms {
+        
+        text-align: left;        /* Asegura la alineación a la izquierda */
+    }
