@@ -51,7 +51,6 @@ async function main() {
             if (!slug) continue;
             
             console.log(`⏳ Procesando post: ${slug}`);
-            
             const postPath = path.join(postsDir, slug);
             fs.mkdirSync(postPath, { recursive: true });
 
@@ -90,7 +89,31 @@ async function main() {
                     } catch (audioError) {
                         finalHtmlBlocks.push(`<p><em>Error al cargar audio.</em></p>`);
                     }
-                } else {
+                } 
+
+                // ===== INICIO: NUEVA LÓGICA PARA IMÁGENES DEL CONTENIDO =====
+                else if (block.type === 'image') {
+                    try {
+                        const notionUrl = block.image.file.url;
+                        console.log(`      Downloading image: ${path.basename(notionUrl)}`);
+                        // Creamos un nombre de archivo único usando el ID del bloque
+                        const extension = path.extname(new URL(notionUrl).pathname) || '.jpg';
+                        const imageFileName = `img-${block.id}${extension}`;
+                        
+                        const imageResponse = await fetch(notionUrl);
+                        const buffer = Buffer.from(await imageResponse.arrayBuffer());
+                        fs.writeFileSync(path.join(postPath, imageFileName), buffer);
+
+                        // Creamos la etiqueta <img> con la ruta relativa a la copia local
+                        const imageTag = `<img src="${imageFileName}" alt="Imagen del post">`;
+                        finalHtmlBlocks.push(imageTag);
+                    } catch (imageError) {
+                        finalHtmlBlocks.push(`<p><em>Error al cargar imagen.</em></p>`);
+                    }
+                }
+                // ===== FIN: NUEVA LÓGICA PARA IMÁGENES DEL CONTENIDO =====
+                
+                else {
                     try {
                         const mdblocks = await n2m.blocksToMarkdown([block]);
                         const mdString = n2m.toMarkdownString(mdblocks);
