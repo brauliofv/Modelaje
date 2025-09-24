@@ -153,7 +153,7 @@ body.light-mode::before {
 
 
 a {
-    color: var(--primary-color);
+    color: #c8a24a;
     text-decoration: none;
     transition: color 0.3s ease;
 }
@@ -506,13 +506,15 @@ footer {
 /* 1. Modificaciones al Navbar solo en la página de inicio */
 .home-photography-style .navbar {
     position: absolute; /* Para que flote sobre el contenido */
-    width: 100%;
-    top: 0;
-    left: 0;
-    background-color: transparent; /* Fondo transparente */
-    box-shadow: none; /* Sin sombra */
-    padding: 2rem 5%;
+    /* width: 100%; */
+    top: 3%;
+    left: 3%;
+    right: 3%;
+    background-color: #7575750a; /* Fondo transparente */
+    /* box-shadow: none;  Sin sombra */
+    padding: 1rem 6%;
     box-sizing: border-box;
+    border-radius: 9px;
 }
 
 /* ===== ESTILOS PARA EL MENÚ LATERAL (OFF-CANVAS) - CORREGIDO ===== */
@@ -1041,7 +1043,8 @@ footer {
 /* Título con líneas decorativas (reutilizable) */
 .section-title-lined {
     text-align: center;
-    margin-bottom: 4rem;
+    margin-bottom: 2rem;
+    margin-top: 3rem;
 }
 
 .section-title-lined h2 {
@@ -1734,7 +1737,7 @@ body.dark-mode .posts-section .post-card:hover {
 .contact-page {
     max-width: 800px;
     margin: 4rem auto; /* Centra la sección */
-    padding: 0 2rem;
+    padding: 1rem 2rem;
 }
 
 .contact-page h2 {
@@ -1908,7 +1911,7 @@ html.is-animating .transition-fade {
 .page-content {
     max-width: 800px;
     margin: 0 auto;
-    padding: 4rem 5%; 
+    padding: 6rem 5%; 
     text-align: center;
 }
 .text-terms {
