@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Página Principal (Homepage) -->
+  <url>
+    <loc>https://braulio.us.kg/</loc>
+    <lastmod>2023-10-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Páginas de Contenido Principal -->
+  <url>
+    <loc>https://braulio.us.kg/photography.html</loc>
+    <lastmod>2023-10-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://braulio.us.kg/course.html</loc>
+    <lastmod>2023-10-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://braulio.us.kg/blog.html</loc>
+    <lastmod>2023-10-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Páginas Secundarias y Posts -->
+  <url>
+    <loc>https://braulio.us.kg/contact.html</loc>
+    <lastmod>2023-10-27</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://braulio.us.kg/faq.html</loc>
+    <lastmod>2023-10-27</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://braulio.us.kg/post.html</loc>
+    <lastmod>2023-10-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Páginas Legales e Informativas -->
+  <url>
+    <loc>https://braulio.us.kg/ethics.html</loc>
+    <lastmod>2023-10-27</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://braulio.us.kg/privacy.html</loc>
+    <lastmod>2023-10-27</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://braulio.us.kg/terms.html</loc>
+    <lastmod>2023-10-27</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+</urlset>
