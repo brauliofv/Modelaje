@@ -295,9 +295,15 @@ body.light-mode .theme-toggle-btn .fa-moon { display: none; }
 
 .hero-photography-image-container img {
     width: 100%;
-    height: 500px; /* Añadimos height para que object-fit funcione correctamente */
+    height: 600px; /* Añadimos height para que object-fit funcione correctamente */
     object-fit: cover; /* Aseguramos que cubra el contenedor */
     display: block;
+
+    mask: linear-gradient(
+            to bottom, 
+            #000 60%, 
+            transparent
+            ); /* Efecto de degradado */
 }
 
 /* ===== INICIO: UTILIDAD PARA SECCIONES DE ANCHO COMPLETO ===== */
@@ -517,7 +523,7 @@ footer {
     border-radius: 9px;
 }
 
-/* ===== ESTILOS PARA EL MENÚ LATERAL (OFF-CANVAS) - CORREGIDO ===== */
+/* ===== ESTILOS PARA EL MENÚ LATERAL (OFF-CANVAS) ===== */
 
 .nav-links {
     position: fixed;
@@ -1482,19 +1488,19 @@ body.dark-mode .posts-section .post-card:hover {
     padding: 4rem 2%; /* Menos padding lateral para que las fotos estén más cerca de los bordes */
 }
 
-/* Cuadrícula de la galería */
+
+
 .photo-gallery-grid {
-    display: grid;
-    /* Crea 3 columnas en escritorio, 2 en tablet y 1 en móvil */
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-    gap: 15px;
+    columns:300px;
+    
 }
 
 .gallery-photo-item {
     overflow: hidden;
     border-radius: 15px;
     cursor: pointer;
-    aspect-ratio: 3 / 4; /* Proporción vertical (puedes ajustarla a 1/1, 16/9, etc.) */
+    margin-bottom: 1rem; /* Espacio entre las filas */
+    border: 1px solid #C8A24A;
 }
 
 .gallery-photo-item img {
@@ -1586,9 +1592,6 @@ body.dark-mode .posts-section .post-card:hover {
 }
 /* ===== FIN ESTILOS PARA LAS PÁGINAS DE GALERÍA DE FOTOS ===== */
 
-.contact-page div {
-    padding-top: 2rem;
-}
 
 
 /* ===== ESTILOS PARA LA BARRA DE NAVEGACIÓN MÓVIL (CORREGIDO PARA DESKTOP) ===== */
@@ -1733,6 +1736,11 @@ body.dark-mode .posts-section .post-card:hover {
 
 /* ===== ESTILOS PARA LA PÁGINA DE CONTACTO Y FORMULARIO ===== */
 
+.contact-page div {
+    padding-top: 2rem;
+}
+
+
 /* Contenedor principal de la página de contacto */
 .contact-page {
     max-width: 800px;
@@ -1780,7 +1788,7 @@ body.dark-mode .posts-section .post-card:hover {
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Efecto al hacer focus (clic) en un campo */
+/* Efecto al hacer focus FOCUS (clic) en un campo */
 .contact-page input[type="text"]:focus,
 .contact-page input[type="email"]:focus,
 .contact-page input[type="tel"]:focus,
@@ -1795,6 +1803,8 @@ body.dark-mode .posts-section .post-card:hover {
     display: block;
     width: 100%;
     margin-top: 1rem;
+    padding: 1.5rem;
+    font-size: 1rem;
 }
 
 
