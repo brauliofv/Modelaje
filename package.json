@@ -20,6 +20,7 @@
   "homepage": "https://github.com/brauliofv/Modelaje#readme",
   "dependencies": {
     "@notionhq/client": "^4.0.2",
+    "@vercel/analytics": "^1.5.0",
     "cors": "^2.8.5",
     "dotenv": "^17.2.1",
     "express": "^5.1.0",
