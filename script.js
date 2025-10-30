@@ -305,67 +305,97 @@ function setupFilters() {
 
 // ===== INICIO: LÓGICA PARA EL FILTRO DE LA GALERÍA DE FOTOGRAFÍA =====
 // ===== INICIO: LÓGICA PARA EL FILTRO DE LA GALERÍA DE FOTOGRAFÍA (VERSIÓN MEJORADA) =====
+// ===== INICIO: LÓGICA DE FILTRO DE GALERÍA (VERSIÓN QUIRÚRGICA Y FINAL) =====
+// ===== INICIO: LÓGICA DE FILTRO DE GALERÍA (VERSIÓN HÍBRIDA FINAL CON FLIP Y FADE) =====
 function initializePhotographyFilters() {
-    // 1. Buscamos el contenedor de los botones de filtro.
     const filterContainer = document.getElementById('photography-filters');
-    // Si no estamos en la página de fotografía, no hacemos nada más.
     if (!filterContainer) return;
 
-    // 2. Seleccionamos los elementos con los que vamos a trabajar.
     const filterButtons = filterContainer.querySelectorAll('.filter-btn');
-    const galleryItems = document.querySelectorAll('#photography-gallery-grid .gallery-photo-item');
+    const galleryGrid = document.getElementById('photography-gallery-grid');
+    const animationDuration = 500; // Debe coincidir con tu CSS (0.5s)
 
-    // 3. Creamos una función reutilizable para aplicar el filtro.
-    //    Esto evita repetir código y hace todo más limpio.
     const applyFilter = (category) => {
-        galleryItems.forEach(item => {
-            // Si la categoría es 'all' o si la categoría del item coincide, lo mostramos.
-            if (category === 'all' || item.dataset.category === category) {
-                item.style.display = 'block';
-            } else {
-                // Si no, lo ocultamos.
-                item.style.display = 'none';
-            }
+        const allItems = Array.from(galleryGrid.children);
+        
+        // --- 1. PRIMERO (FIRST): CAPTURAR ESTADO INICIAL ---
+        const initialPositions = new Map();
+        const visibleItems = allItems.filter(item => item.style.display !== 'none' && !item.classList.contains('hidden'));
+        
+        visibleItems.forEach(item => {
+            initialPositions.set(item, item.getBoundingClientRect());
         });
+
+        // --- 2. ANIMACIÓN DE SALIDA ---
+        // Hacemos que TODAS las fotos visibles actualmente comiencen a desvanecerse y encogerse.
+        // Esto es CLAVE para la consistencia en la transición "All" -> "Filtro".
+        visibleItems.forEach(item => {
+            item.classList.add('hidden');
+        });
+        
+        // --- 3. ESPERAR Y ACTUALIZAR EL LAYOUT ---
+        setTimeout(() => {
+            // --- 4. ÚLTIMO (LAST): ACTUALIZAR EL DOM Y MEDIR POSICIONES FINALES ---
+            allItems.forEach(item => {
+                const shouldBeVisible = item.dataset.category === category || category === 'all';
+                item.style.display = shouldBeVisible ? 'block' : 'none';
+            });
+
+            const finalVisibleItems = allItems.filter(item => item.style.display !== 'none');
+
+            // --- 5. INVERTIR (INVERT): PREPARAMOS LA ANIMACIÓN DE ENTRADA Y DESPLAZAMIENTO ---
+            finalVisibleItems.forEach(item => {
+                const newPos = item.getBoundingClientRect();
+                const oldPos = initialPositions.get(item);
+
+                // Si la foto ya estaba en el DOM (no es completamente nueva), calculamos su desplazamiento.
+                if (oldPos) {
+                    const deltaX = oldPos.left - newPos.left;
+                    const deltaY = oldPos.top - newPos.top;
+                    
+                    // La movemos instantáneamente a su posición antigua para que pueda animarse a la nueva.
+                    item.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
+                }
+                // Si es una foto nueva, no hacemos nada, simplemente aparecerá en su lugar.
+            });
+
+            // --- 6. REPRODUCIR (PLAY): EJECUTAMOS LAS ANIMACIONES ---
+            // Forzamos al navegador a procesar los cambios antes de la animación final.
+            requestAnimationFrame(() => {
+                finalVisibleItems.forEach(item => {
+                    // Quitamos la clase 'hidden' para que la foto se anime a opacidad 1 y escala 1.
+                    item.classList.remove('hidden');
+                    // Reseteamos la transformación para que se desplace suavemente a su posición final (0,0).
+                    item.style.transform = '';
+                });
+            });
+
+        }, animationDuration);
     };
-    
-    // 4. Añadimos el evento 'click' a cada botón.
+
+    // --- Lógica de los botones (sin cambios importantes) ---
     filterButtons.forEach(button => {
         button.addEventListener('click', () => {
-            // a. Gestionamos la clase 'active' para el estilo visual.
+            if (button.classList.contains('active')) return;
             filterButtons.forEach(btn => btn.classList.remove('active'));
             button.classList.add('active');
-            
-            // b. Obtenemos la categoría del botón en el que se hizo clic.
-            const selectedCategory = button.dataset.category;
-            
-            // c. Llamamos a nuestra función para que aplique el filtro.
-            applyFilter(selectedCategory);
+            applyFilter(button.dataset.category);
         });
     });
 
-    // ===== INICIO DE LA NUEVA LÓGICA: LEER LA URL =====
-    // Esto se ejecuta solo una vez, cuando la página carga.
-    
-    // a. Creamos un objeto para leer los parámetros de la URL actual.
+    // --- Lógica de la carga inicial (sin cambios) ---
     const params = new URLSearchParams(window.location.search);
-    // b. Buscamos un parámetro llamado 'category'. Si no existe, será 'null'.
-    const categoryFromURL = params.get('category'); 
-
-    // c. Si encontramos una categoría en la URL (ej: "runway").
+    const categoryFromURL = params.get('category');
     if (categoryFromURL) {
-        // d. Buscamos el botón que corresponde a esa categoría.
         const targetButton = filterContainer.querySelector(`.filter-btn[data-category="${categoryFromURL}"]`);
-        
-        // e. Si encontramos el botón...
-        if (targetButton) {
-            // f. ...¡simulamos un clic en él!
-            // Esto es muy eficiente porque reutiliza toda la lógica de clic que ya programamos.
-            targetButton.click(); 
-        }
+        if (targetButton) targetButton.click();
+    } else {
+        const allButton = filterContainer.querySelector('.filter-btn[data-category="all"]');
+        if (allButton) allButton.classList.add('active');
     }
-    // ===== FIN DE LA NUEVA LÓGICA =====
 }
+// ===== FIN: LÓGICA DE FILTRO DE GALERÍA (VERSIÓN HÍBRIDA FINAL CON FLIP Y FADE) =====
+// ===== FIN: LÓGICA DE FILTRO DE GALERÍA (VERSIÓN QUIRÚRGICA Y FINAL) =====
 // ===== FIN: LÓGICA PARA EL FILTRO DE LA GALERÍA DE FOTOGRAFÍA =====
 // ===== FIN: LÓGICA PARA EL FILTRO DE LA GALERÍA DE FOTOGRAFÍA =====
 

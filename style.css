@@ -1516,6 +1516,22 @@ body.dark-mode .posts-section .post-card:hover {
     filter: brightness(0.8);
 }
 
+/* ===== INICIO: ESTILOS PARA LA ANIMACIÓN DE LA GALERÍA (CON FLIP) ===== */
+
+/* 1. La transición ahora es más genérica para que funcione
+      tanto para la escala/opacidad como para el desplazamiento (translate). */
+.gallery-photo-item {
+    transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+/* 2. El estado 'hidden' no cambia. Sigue siendo para la animación de entrada/salida. */
+.gallery-photo-item.hidden {
+    transform: scale(0.8);
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* ===== FIN: ESTILOS PARA LA ANIMACIÓN DE LA GALERÍA (CON FLIP) ===== */
 /* ===== LIGHTBOX (CON DESCRIPCIÓN) ===== */
 
 /* Contenedor del lightbox, inicialmente oculto */
