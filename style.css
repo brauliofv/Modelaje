@@ -1279,8 +1279,12 @@ body.dark-mode .posts-section .post-card:hover {
     height: auto;
     border-radius: 15px;
     margin: 2rem 0;
+    box-shadow: #0000007e 0px 4px 15px;
 }
-
+#post-content audio {
+    border-radius: 25px;
+    box-shadow: var(--text-color-light) 0px 4px 15px;
+}
 /* 6. Solución para videos pequeños (ya teníamos el contenedor) */
 /* Simplemente nos aseguramos de que se aplique correctamente aquí */
 .single-post-page .video-container {

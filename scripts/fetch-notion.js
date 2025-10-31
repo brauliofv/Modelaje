@@ -3,13 +3,16 @@
 const { Client } = require("@notionhq/client");
 const { NotionToMarkdown } = require("notion-to-md");
 const Showdown = require('showdown');
+const youtubeExtension = require('./showdown-youtube-extension');
 const fs = require('fs');
 const path = require('path');
 require("dotenv").config();
 
 const notion = new Client({ auth: process.env.NOTION_KEY });
 const databaseId = process.env.NOTION_DATABASE_ID;
-const converter = new Showdown.Converter();
+const converter = new Showdown.Converter({
+    extensions: [youtubeExtension] // <--- AQUÍ SE INYECTA LA LÓGICA
+});
 const n2m = new NotionToMarkdown({ notionClient: notion });
 const postsDir = path.join(__dirname, '..', 'assets', 'posts');
 const DOMAIN = "https://braulio.us.kg"; // Reemplaza con tu dominio
